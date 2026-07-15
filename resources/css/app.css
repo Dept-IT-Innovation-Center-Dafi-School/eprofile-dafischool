@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+/* Custom styles outside Tailwind utilities */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+        outline: 3px solid #d8901f;
+        outline-offset: 2px;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    /* Swiper: dot & arrow styling */
+    .swiper-pagination-bullet {
+        background: #ffffff;
+        opacity: 0.6;
+        width: 10px;
+        height: 10px;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #d8901f;
+        opacity: 1;
+    }
+
+    /* Soft shadow with gold glow for floating CTA */
+    .shadow-glow {
+        box-shadow: 0 8px 24px -4px rgba(216, 144, 31, 0.55), 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    /* Fonts */
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+
+    /* Primary color (teal) */
+    --color-primary-50: #eefdf9;
+    --color-primary-100: #d3f8ec;
+    --color-primary-200: #a4f0da;
+    --color-primary-300: #6de3c4;
+    --color-primary-400: #3ecead;
+    --color-primary-500: #22b295;
+    --color-primary-600: #178f79;
+    --color-primary-700: #167262;
+    --color-primary-800: #175b4f;
+    --color-primary-900: #164b43;
+    --color-primary-950: #0d3129;
+
+    /* Gold color (amber) */
+    --color-gold-50: #fdf9ed;
+    --color-gold-100: #faf0cd;
+    --color-gold-200: #f4de9c;
+    --color-gold-300: #edc662;
+    --color-gold-400: #e6ab37;
+    --color-gold-500: #d8901f;
+    --color-gold-600: #bb6f17;
+    --color-gold-700: #985017;
+    --color-gold-800: #7c4019;
+    --color-gold-900: #68351a;
+}
