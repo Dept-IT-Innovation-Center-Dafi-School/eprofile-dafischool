@@ -34,5 +34,7 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
 
     Route::get('/hero-slides', \App\Livewire\Admin\HeroSlides\Manager::class)->name('hero-slides.index');
 
+    Route::get('/academic-years', \App\Livewire\Admin\AcademicYears\Manager::class)->name('academic-years.index');
+
     Route::get('/account', \App\Livewire\Admin\Account\Manager::class)->name('account');
 });

@@ -39,6 +39,7 @@
                         ['route' => 'admin.dashboard', 'active' => 'admin.dashboard', 'icon' => 'home', 'label' => 'Dashboard'],
                         ['route' => 'admin.education-levels.index', 'active' => 'admin.education-levels.*', 'icon' => 'academic-cap', 'label' => 'Jenjang Pendidikan'],
                         ['route' => 'admin.hero-slides.index', 'active' => 'admin.hero-slides.*', 'icon' => 'photo', 'label' => 'Carousel Beranda'],
+                        ['route' => 'admin.academic-years.index', 'active' => 'admin.academic-years.*', 'icon' => 'calendar', 'label' => 'Tahun Ajaran'],
                     ];
                 @endphp
                 @foreach ($navItems as $item)
@@ -88,7 +89,8 @@
                         class="lg:hidden p-2 -ml-2 rounded-lg text-slate-600 hover:bg-slate-100">
                     <x-admin.icon name="menu" class="w-6 h-6" />
                 </button>
-                <h1 class="text-lg font-semibold text-slate-900 truncate">{{ $title ?? 'Dashboard' }}</h1>
+                <h1 class="text-lg font-semibold text-slate-900 truncate flex-1">{{ $title ?? 'Dashboard' }}</h1>
+                <livewire:admin.academic-year-switcher />
             </div>
 
             <!-- Content -->
