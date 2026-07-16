@@ -38,7 +38,7 @@ eksplisit di luar scope — halaman tetap pola "cover/splash", bukan halaman scr
 
 ### Phase 2: Core feature — logo end-to-end
 - [x] Task 3: Admin bisa upload/ganti/hapus logo di `/admin/settings`
-- [ ] Task 4: Homepage — logo overlay + headline/tagline visible
+- [x] Task 4: Homepage — logo overlay + headline/tagline visible
 
 ### Checkpoint: Core Feature
 - [ ] `composer run test` hijau
@@ -155,18 +155,18 @@ glass/blur), fallback ke teks nama sekolah kalau `logo` belum diupload. Ubah H1
 dengan fade-in animation yang menghormati `prefers-reduced-motion`.
 
 **Acceptance criteria:**
-- [ ] Logo tampil pojok kiri atas kalau `SchoolSetting::current()->logo` terisi
-- [ ] Fallback teks nama sekolah (bukan broken image) kalau logo kosong
-- [ ] Headline (nama sekolah) + tagline terlihat jelas di atas carousel, fade-in halus
-- [ ] Animasi fade-in nonaktif total untuk `prefers-reduced-motion: reduce`
-- [ ] Viewport pertama tetap fullscreen (`h-screen` tidak berubah), tidak ada footer/section baru
+- [x] Logo tampil pojok kiri atas kalau `SchoolSetting::current()->logo` terisi
+- [x] Fallback teks nama sekolah (bukan broken image) kalau logo kosong
+- [x] Headline (nama sekolah) + tagline terlihat jelas di atas carousel, fade-in halus
+- [x] Animasi fade-in nonaktif total untuk `prefers-reduced-motion: reduce` (CSS guard, belum dicek visual)
+- [x] Viewport pertama tetap fullscreen (`h-screen` tidak berubah), tidak ada footer/section baru
 
 **Verification:**
-- [ ] Test baru di `tests/Feature/HomePageHeroTest.php`: assert logo `<img>` muncul saat `logo` terisi,
-      assert fallback text muncul saat `logo` null
-- [ ] `composer run test` hijau
+- [x] Test baru di `tests/Feature/HomePageHeroTest.php` (3 test baru): assert logo `<img id="hero-logo">`
+      muncul saat `logo` terisi, assert fallback (tanpa `#hero-logo`) saat `logo` null, assert headline/tagline visible
+- [x] `composer run test` hijau (67/67), `npm run build` sukses
 - [ ] Manual: buka `/`, cek logo & fallback (hapus logo di admin lalu reload), cek headline/tagline,
-      toggle `prefers-reduced-motion` di devtools dan pastikan animasi mati
+      toggle `prefers-reduced-motion` di devtools dan pastikan animasi mati (belum dicek visual)
 
 **Dependencies:** Task 3
 

@@ -11,7 +11,7 @@
 
 ## Phase 2: Core feature — logo end-to-end
 - [x] Task 3: Admin bisa upload/ganti/hapus logo di `/admin/settings`
-- [ ] Task 4: Homepage — logo overlay + headline/tagline visible
+- [x] Task 4: Homepage — logo overlay + headline/tagline visible
 
 ### Checkpoint: Core Feature
 - [ ] `composer run test` hijau
