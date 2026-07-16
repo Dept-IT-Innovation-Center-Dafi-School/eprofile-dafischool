@@ -1,6 +1,16 @@
 <div class="max-w-xl space-y-6">
     <form wire:submit="save" class="space-y-6">
         <div class="bg-white rounded-xl border border-slate-200 p-6">
+            <h2 class="text-base font-semibold text-slate-900 mb-4">Logo Sekolah</h2>
+
+            @include('livewire.admin.partials.image-upload-field', [
+                'modelName' => 'image',
+                'label' => 'Logo',
+                'existingImage' => $existingImage,
+            ])
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 p-6">
             <h2 class="text-base font-semibold text-slate-900 mb-4">Kontak</h2>
 
             <div class="space-y-4">

@@ -2,15 +2,26 @@
 
 namespace App\Livewire\Admin\Settings;
 
+use App\Livewire\Concerns\HandlesImageUpload;
 use App\Models\SchoolSetting;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 #[Title('Pengaturan Sekolah')]
 #[Layout('components.admin.layout', ['title' => 'Pengaturan Sekolah'])]
 class Manager extends Component
 {
+    use HandlesImageUpload, WithFileUploads;
+
+    public ?TemporaryUploadedFile $image = null;
+
+    #[Locked]
+    public ?string $existingImage = null;
+
     public string $phone = '';
 
     public string $address = '';
@@ -31,6 +42,7 @@ class Manager extends Component
     {
         $setting = SchoolSetting::current();
 
+        $this->existingImage = $setting->logo;
         $this->phone = (string) $setting->phone;
         $this->address = (string) $setting->address;
         $this->email = (string) $setting->email;
@@ -59,9 +71,13 @@ class Manager extends Component
             'instagramUrl' => 'nullable|url|max:255',
             'facebookUrl' => 'nullable|url|max:255',
             'youtubeUrl' => 'nullable|url|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
+        $logoUrl = $this->resolveImageUrl('uploads/school-settings');
+
         SchoolSetting::current()->update([
+            'logo' => $logoUrl,
             'phone' => $validated['phone'],
             'address' => $validated['address'],
             'email' => $validated['email'],
@@ -71,6 +87,10 @@ class Manager extends Component
             'facebook_url' => $validated['facebookUrl'],
             'youtube_url' => $validated['youtubeUrl'],
         ]);
+
+        $this->existingImage = $logoUrl;
+        $this->image = null;
+        $this->imageRemoved = false;
 
         $this->dispatch('toast', type: 'success', message: 'Pengaturan sekolah berhasil disimpan.');
     }
