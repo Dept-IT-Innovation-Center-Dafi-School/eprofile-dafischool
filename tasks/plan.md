@@ -148,7 +148,7 @@ settings pakai partial `image-upload-field.blade.php` yang sudah ada.
 
 ---
 
-## Task 4: Homepage — logo overlay + headline/tagline visible
+## Task 4: Homepage — logo overlay + headline/tagline visible — ⚠️ Headline/tagline bagian DIREVISI, lihat Task 8
 
 **Description:** Tampilkan logo sekolah di pojok kiri atas hero (fixed, background
 glass/blur), fallback ke teks nama sekolah kalau `logo` belum diupload. Ubah H1
@@ -281,19 +281,89 @@ bikin user (dan tim marketing) komplain. Cabut total efeknya, foto slide jadi st
 
 ---
 
+## Task 8: Cabut headline + tagline overlay (revisi Task 4)
+
+**Description:** Foto marketing sudah punya teks tertanam di gambar. Headline+tagline
+besar di tengah hero (dari Task 4) bikin dua lapis teks bertumpuk di foto yang sama —
+malah susah dibaca, kebalikan dari tujuan "polesan premium". Hapus total blok
+headline+tagline. Badge logo+nama sekolah kecil di pojok kiri atas TETAP ADA (beda
+elemen, bukan teks besar yang menimpa foto).
+
+**Acceptance criteria:**
+- [ ] Blok `<h1>` "Darul Fikri" + `<p>` tagline (posisi center, absolute inset-0)
+      dihapus dari `home.blade.php`
+- [ ] Badge logo+nama sekolah pojok kiri atas TIDAK berubah
+- [ ] Tidak ada sisa CSS/markup mati terkait headline/tagline yang dihapus
+
+**Verification:**
+- [ ] Test direvisi di `tests/Feature/HomePageHeroTest.php`:
+      `test_shows_visible_headline_and_tagline` diganti jadi assert tagline text
+      ("Pendidikan berkualitas dari RTK hingga SMA") TIDAK muncul lagi di halaman
+- [ ] `composer run test` hijau, `vendor/bin/pint` bersih, `npm run build` sukses
+- [ ] Manual: buka `/`, pastikan tidak ada teks besar di tengah foto, badge logo
+      pojok kiri atas masih ada
+
+**Dependencies:** Task 4 (revisi langsung di atas hasil task itu)
+
+**Files likely touched:**
+- `resources/views/home.blade.php`
+- `tests/Feature/HomePageHeroTest.php`
+
+**Estimated scope:** XS (2 files)
+
+---
+
+## Task 9: Foto slide full-bleed `object-cover` di semua breakpoint
+
+**Description:** Ganti foto slide dari `object-cover` (mobile) / `object-contain`
+(desktop, lg+) jadi `object-cover` di semua ukuran layar — foto selalu memenuhi 1
+layar penuh, boleh crop di tepi (dikonfirmasi user). Hapus `<img>` blurred-backdrop
+duplikat (`scale-110 blur-2xl`, `hidden lg:block`) yang sebelumnya dipakai untuk
+mengisi ruang kosong di desktop — sudah tidak diperlukan karena foto utama sekarang
+selalu full-bleed.
+
+**Acceptance criteria:**
+- [ ] Foto utama slide pakai `object-cover` di semua breakpoint (hapus `lg:object-contain`)
+- [ ] `<img>` blurred-backdrop duplikat dihapus total dari markup
+- [ ] Foto selalu memenuhi 1 layar penuh (`w-full h-full`) tanpa letterbox di desktop
+
+**Verification:**
+- [ ] Test direvisi di `tests/Feature/HomePageHeroTest.php`: assert markup TIDAK
+      mengandung `lg:object-contain` atau `blur-2xl` (backdrop duplikat) lagi
+- [ ] `composer run test` hijau, `vendor/bin/pint` bersih, `npm run build` sukses
+- [ ] Manual: buka `/` di lebar layar desktop, pastikan foto full-bleed tanpa area
+      kosong/blur di sisi kiri-kanan
+
+**Dependencies:** Task 8 (sama-sama menyentuh `home.blade.php`, dikerjakan sequential)
+
+**Files likely touched:**
+- `resources/views/home.blade.php`
+- `tests/Feature/HomePageHeroTest.php`
+
+**Estimated scope:** XS (2 files)
+
+---
+
 ## Risks and Mitigations
 | Risk | Impact | Mitigation |
 |------|--------|------------|
 | `HandlesImageUpload` didesain untuk 1 gambar/komponen — aman untuk logo (cuma 1 gambar), tapi tidak langsung reusable kalau Settings butuh field gambar ke-2 nanti | Low | Dicatat di Task 3, bukan blocker sekarang |
 | Fade-in adalah pola CSS baru, belum ada preseden di repo | Medium | Diverifikasi manual khusus, ikuti struktur `@layer components` yang sudah ada |
-| Copy headline/tagline final belum dikonfirmasi tim marketing | Low | Task 4 pakai teks yang sudah ada di kode sekarang, gampang diganti kalau ada copy baru |
 | ~~Ken Burns bikin teks di foto sulit dibaca~~ **TERJADI** — foto marketing sudah ada teks tertanam | — | Direvisi via Task 7: efek dicabut total, foto slide statis |
+| ~~Headline/tagline overlay bikin dua lapis teks di foto~~ **TERJADI** — sama akar masalahnya dengan Ken Burns | — | Direvisi via Task 8: headline/tagline dicabut total |
+| Foto full-bleed `object-cover` (Task 9) bisa motong teks yang tertanam di foto di tepi, tergantung rasio layar | Medium | Trade-off diterima eksplisit oleh user (bukan blocker); tim marketing perlu diberi tahu supaya hindari taruh teks penting dekat tepi foto |
 
 ## Open Questions
-- Konfirmasi copy headline/tagline final dari tim marketing (lihat `docs/spec-homepage-hero-polish.md`).
+(tidak ada lagi — pertanyaan copy headline/tagline sudah tidak relevan setelah Task 8)
 
 ## Revision Log
-- **2026-07-16:** Task 6 (Ken Burns zoom effect) dicabut via Task 7. Tim marketing
-  mengonfirmasi foto hero sudah diedit dengan teks tertanam (nama gedung/fasilitas),
-  sehingga efek zoom bikin teks itu sulit dibaca. Spec di `docs/spec-homepage-hero-polish.md`
-  diperbarui: foto slide sekarang eksplisit harus statis, tanpa transform/animation apa pun.
+- **2026-07-16 (revisi 1):** Task 6 (Ken Burns zoom effect) dicabut via Task 7. Tim
+  marketing mengonfirmasi foto hero sudah diedit dengan teks tertanam (nama
+  gedung/fasilitas), sehingga efek zoom bikin teks itu sulit dibaca. Spec diperbarui:
+  foto slide sekarang eksplisit harus statis, tanpa transform/animation apa pun.
+- **2026-07-16 (revisi 2):** Task 4 bagian headline/tagline dicabut via Task 8 (alasan
+  sama: dua lapis teks di atas foto yang sama bikin susah dibaca). Ditambah Task 9:
+  foto slide diganti jadi full-bleed `object-cover` di semua ukuran layar, trik
+  blurred-backdrop desktop dihapus. User mengonfirmasi menerima risiko foto ter-crop
+  di tepi pada rasio layar tertentu sebagai trade-off demi tampilan full-screen
+  konsisten.
