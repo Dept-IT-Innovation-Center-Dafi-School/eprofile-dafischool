@@ -38,6 +38,9 @@ class Form extends Component
     #[Validate('required|integer|min:0')]
     public int $order = 0;
 
+    #[Validate('nullable|string|max:20')]
+    public ?string $whatsappNumber = null;
+
     public ?TemporaryUploadedFile $image = null;
 
     #[Locked]
@@ -54,6 +57,7 @@ class Form extends Component
             $this->tagline = $this->level->tagline;
             $this->program = $this->level->program;
             $this->order = $this->level->order;
+            $this->whatsappNumber = $this->level->whatsapp_number;
             $this->existingImage = $this->level->image;
         }
     }
@@ -71,6 +75,7 @@ class Form extends Component
             'tagline' => 'required|string|max:255',
             'program' => 'required|string',
             'order' => 'required|integer|min:0',
+            'whatsappNumber' => 'nullable|string|max:20',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
@@ -88,6 +93,7 @@ class Form extends Component
                 'tagline' => $this->tagline,
                 'program' => $this->program,
                 'order' => $this->order,
+                'whatsapp_number' => $this->whatsappNumber,
                 'image' => $imageUrl,
             ]);
             $message = 'Jenjang berhasil diperbarui.';
@@ -98,6 +104,7 @@ class Form extends Component
                 'tagline' => $this->tagline,
                 'program' => $this->program,
                 'order' => $this->order,
+                'whatsapp_number' => $this->whatsappNumber,
                 'image' => $imageUrl,
             ]);
             $message = 'Jenjang berhasil ditambahkan.';
