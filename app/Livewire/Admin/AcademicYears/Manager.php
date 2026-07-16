@@ -15,15 +15,14 @@ use Livewire\Component;
 class Manager extends Component
 {
     #[Locked]
-    public int|string|null $editingId = null;
+    public ?int $editingId = null;
 
     #[Validate('required|string|max:20')]
     public string $label = '';
 
-    public function startCreate(): void
+    public function create(): void
     {
-        $this->reset(['label', 'editingId']);
-        $this->editingId = 'new';
+        AcademicYear::create(['label' => AcademicYear::nextLabel()]);
     }
 
     public function startEdit(int $id): void
@@ -40,17 +39,11 @@ class Manager extends Component
                 'required',
                 'string',
                 'max:20',
-                Rule::unique('academic_years', 'label')->ignore(
-                    $this->editingId === 'new' ? null : $this->editingId
-                ),
+                Rule::unique('academic_years', 'label')->ignore($this->editingId),
             ],
         ]);
 
-        if ($this->editingId === 'new') {
-            AcademicYear::create(['label' => $this->label]);
-        } else {
-            AcademicYear::findOrFail($this->editingId)->update(['label' => $this->label]);
-        }
+        AcademicYear::findOrFail($this->editingId)->update(['label' => $this->label]);
 
         $this->cancel();
     }

@@ -33,4 +33,26 @@ class AcademicYear extends Model
             return $year;
         });
     }
+
+    /**
+     * The next "YYYY/YYYY+1" label following the latest existing year,
+     * or a label derived from the current date if none exist yet.
+     */
+    public static function nextLabel(): string
+    {
+        $latestStart = static::query()
+            ->get(['label'])
+            ->map(fn (self $year) => (int) substr($year->label, 0, 4))
+            ->max();
+
+        if ($latestStart) {
+            return ($latestStart + 1) . '/' . ($latestStart + 2);
+        }
+
+        $year = (int) now()->format('Y');
+        $month = (int) now()->format('n');
+        $start = $month >= 7 ? $year : $year - 1;
+
+        return "{$start}/" . ($start + 1);
+    }
 }

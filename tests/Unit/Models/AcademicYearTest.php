@@ -30,4 +30,17 @@ class AcademicYearTest extends TestCase
 
         $this->assertTrue(AcademicYear::active()->first()->is($active));
     }
+
+    public function test_next_label_increments_from_the_latest_existing_year(): void
+    {
+        AcademicYear::create(['label' => '2025/2026']);
+        AcademicYear::create(['label' => '2026/2027']);
+
+        $this->assertSame('2027/2028', AcademicYear::nextLabel());
+    }
+
+    public function test_next_label_falls_back_to_current_date_when_no_years_exist(): void
+    {
+        $this->assertMatchesRegularExpression('#^\d{4}/\d{4}$#', AcademicYear::nextLabel());
+    }
 }

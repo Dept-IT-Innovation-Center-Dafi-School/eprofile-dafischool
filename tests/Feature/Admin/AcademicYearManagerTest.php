@@ -13,28 +13,27 @@ class AcademicYearManagerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_admin_can_create_an_academic_year(): void
+    public function test_clicking_add_generates_the_next_year_automatically(): void
     {
         $user = User::factory()->create();
+        AcademicYear::create(['label' => '2026/2027', 'is_active' => true]);
 
         Livewire::actingAs($user)
             ->test(Manager::class)
-            ->call('startCreate')
-            ->set('label', '2027/2028')
-            ->call('save')
-            ->assertHasNoErrors();
+            ->call('create');
 
         $this->assertDatabaseHas('academic_years', ['label' => '2027/2028']);
     }
 
-    public function test_rejects_duplicate_label(): void
+    public function test_editing_rejects_a_duplicate_label(): void
     {
         $user = User::factory()->create();
         AcademicYear::create(['label' => '2026/2027']);
+        $other = AcademicYear::create(['label' => '2027/2028']);
 
         Livewire::actingAs($user)
             ->test(Manager::class)
-            ->call('startCreate')
+            ->call('startEdit', $other->id)
             ->set('label', '2026/2027')
             ->call('save')
             ->assertHasErrors(['label']);
