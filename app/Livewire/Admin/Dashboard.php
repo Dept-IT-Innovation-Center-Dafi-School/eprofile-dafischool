@@ -18,14 +18,20 @@ class Dashboard extends Component
         $yearId = app(AcademicYearContext::class)->current()?->id;
         $scoped = fn ($query) => $query->where('academic_year_id', $yearId);
 
+        $levels = EducationLevel::orderBy('order')->withCount([
+            'facilities' => $scoped,
+            'classStats' => $scoped,
+            'extracurriculars' => $scoped,
+            'activities' => $scoped,
+        ])->get();
+
         return view('livewire.admin.dashboard', [
-            'levels' => EducationLevel::orderBy('order')->withCount([
-                'facilities' => $scoped,
-                'classStats' => $scoped,
-                'extracurriculars' => $scoped,
-                'activities' => $scoped,
-            ])->get(),
+            'levels' => $levels,
             'slideCount' => HeroSlide::count(),
+            'totalContentItems' => $levels->sum(fn ($level) => $level->facilities_count
+                + $level->class_stats_count
+                + $level->extracurriculars_count
+                + $level->activities_count),
         ]);
     }
 }
