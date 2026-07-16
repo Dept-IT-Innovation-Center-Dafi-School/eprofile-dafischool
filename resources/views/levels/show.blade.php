@@ -52,8 +52,8 @@
         </section>
 
         <!-- Facilities -->
-        <x-level-section eyebrow="Sarana & Prasarana" title="Fasilitas Sekolah" :items="$level->facilities"
-                          empty-message="Fasilitas sekolah belum ditambahkan.">
+        <x-level-section eyebrow="Sarana & Prasarana" title="Fasilitas Jenjang" :items="$level->facilities"
+                          empty-message="Fasilitas jenjang belum ditambahkan.">
             @foreach ($level->facilities as $facility)
                 <x-image-card :item="$facility" />
             @endforeach
