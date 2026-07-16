@@ -1,10 +1,4 @@
 <div class="space-y-6">
-    @if (session('success'))
-        <div role="status" class="p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
-            ✓ {{ session('success') }}
-        </div>
-    @endif
-
     <div class="flex justify-between items-center">
         <p class="text-sm text-slate-500">{{ $slides->count() }} foto slide</p>
         @if (!$editingId)
@@ -94,8 +88,8 @@
                                     aria-label="Edit slide {{ $slide->alt ?: $slide->id }}">
                                 <x-admin.icon name="pencil" class="w-4 h-4" />
                             </button>
-                            <button wire:click="delete({{ $slide->id }})"
-                                    wire:confirm="Hapus slide ini? Tindakan tidak bisa dibatalkan."
+                            <button type="button"
+                                    x-on:click="$store.confirm.show({ message: 'Hapus slide ini? Tindakan tidak bisa dibatalkan.', onConfirm: () => $wire.delete({{ $slide->id }}) })"
                                     class="p-1.5 rounded-md bg-white/90 backdrop-blur text-slate-700 hover:text-red-600 shadow-sm transition"
                                     aria-label="Hapus slide {{ $slide->alt ?: $slide->id }}">
                                 <x-admin.icon name="trash" class="w-4 h-4" />

@@ -30,7 +30,7 @@ class Index extends Component
         }
 
         $level->delete();
-        session()->flash('success', 'Jenjang berhasil dihapus.');
+        $this->dispatch('toast', type: 'success', message: 'Jenjang berhasil dihapus.');
     }
 
     protected function reorderQuery(): Builder

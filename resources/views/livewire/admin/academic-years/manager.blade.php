@@ -1,10 +1,4 @@
 <div class="space-y-6 max-w-2xl">
-    @if (session('error'))
-        <div role="alert" class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-            {{ session('error') }}
-        </div>
-    @endif
-
     <div class="flex justify-between items-center">
         <p class="text-sm text-slate-500">{{ $years->count() }} tahun ajaran</p>
         <button wire:click="create"
@@ -46,8 +40,8 @@
                             Aktif
                         </span>
                     @else
-                        <button wire:click="setActive({{ $year->id }})"
-                                wire:confirm="Jadikan {{ $year->label }} sebagai tahun ajaran aktif?"
+                        <button type="button"
+                                x-on:click="$store.confirm.show({ message: 'Jadikan {{ $year->label }} sebagai tahun ajaran aktif?', confirmLabel: 'Jadikan Aktif', variant: 'primary', onConfirm: () => $wire.setActive({{ $year->id }}) })"
                                 class="shrink-0 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 hover:bg-primary-50 hover:text-primary-700 text-xs font-semibold transition">
                             Jadikan Aktif
                         </button>
@@ -59,8 +53,8 @@
                                 aria-label="Edit {{ $year->label }}">
                             <x-admin.icon name="pencil" class="w-4 h-4" />
                         </button>
-                        <button wire:click="delete({{ $year->id }})"
-                                wire:confirm="Hapus {{ $year->label }}? Tindakan tidak bisa dibatalkan."
+                        <button type="button"
+                                x-on:click="$store.confirm.show({ message: 'Hapus {{ $year->label }}? Tindakan tidak bisa dibatalkan.', onConfirm: () => $wire.delete({{ $year->id }}) })"
                                 class="p-2 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 transition"
                                 aria-label="Hapus {{ $year->label }}">
                             <x-admin.icon name="trash" class="w-4 h-4" />

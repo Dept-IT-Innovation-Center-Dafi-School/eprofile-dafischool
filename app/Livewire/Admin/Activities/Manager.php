@@ -88,6 +88,7 @@ class Manager extends Component
             ]);
         }
 
+        $this->dispatch('toast', type: 'success', message: 'Data berhasil disimpan.');
         $this->cancel();
     }
 
@@ -101,6 +102,7 @@ class Manager extends Component
         $activity = $this->query()->findOrFail($id);
         $this->deleteImageIfExists($activity->image);
         $activity->delete();
+        $this->dispatch('toast', type: 'success', message: 'Data berhasil dihapus.');
         $this->cancel();
     }
 

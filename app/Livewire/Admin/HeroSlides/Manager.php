@@ -76,6 +76,7 @@ class Manager extends Component
             ]);
         }
 
+        $this->dispatch('toast', type: 'success', message: 'Slide berhasil disimpan.');
         $this->cancel();
     }
 
@@ -89,6 +90,7 @@ class Manager extends Component
         $slide = HeroSlide::findOrFail($id);
         $this->deleteImageIfExists($slide->image);
         $slide->delete();
+        $this->dispatch('toast', type: 'success', message: 'Slide dihapus.');
         $this->cancel();
     }
 

@@ -92,6 +92,7 @@ trait ManagesNamedChildRecords
             ]);
         }
 
+        $this->dispatch('toast', type: 'success', message: 'Data berhasil disimpan.');
         $this->cancel();
     }
 
@@ -105,6 +106,7 @@ trait ManagesNamedChildRecords
         $item = $this->query()->findOrFail($id);
         $this->deleteImageIfExists($item->image);
         $item->delete();
+        $this->dispatch('toast', type: 'success', message: 'Data berhasil dihapus.');
         $this->cancel();
     }
 

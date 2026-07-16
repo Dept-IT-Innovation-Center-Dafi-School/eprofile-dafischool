@@ -1,10 +1,4 @@
 <div class="max-w-xl space-y-6">
-    @if (session('success'))
-        <div class="px-4 py-3 rounded-lg bg-green-50 text-green-700 text-sm border border-green-200">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="bg-white rounded-xl border border-slate-200 p-6">
         <h2 class="text-base font-semibold text-slate-900 mb-4">Profil</h2>
 

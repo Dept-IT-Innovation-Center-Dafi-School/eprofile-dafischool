@@ -22,7 +22,8 @@ class Manager extends Component
 
     public function create(): void
     {
-        AcademicYear::create(['label' => AcademicYear::nextLabel()]);
+        $year = AcademicYear::create(['label' => AcademicYear::nextLabel()]);
+        $this->dispatch('toast', type: 'success', message: "Tahun ajaran {$year->label} ditambahkan.");
     }
 
     public function startEdit(int $id): void
@@ -45,6 +46,7 @@ class Manager extends Component
 
         AcademicYear::findOrFail($this->editingId)->update(['label' => $this->label]);
 
+        $this->dispatch('toast', type: 'success', message: 'Tahun ajaran diperbarui.');
         $this->cancel();
     }
 
@@ -55,7 +57,8 @@ class Manager extends Component
 
     public function setActive(int $id): void
     {
-        AcademicYear::setActive($id);
+        $year = AcademicYear::setActive($id);
+        $this->dispatch('toast', type: 'success', message: "{$year->label} dijadikan tahun ajaran aktif.");
     }
 
     public function delete(int $id): void
@@ -63,11 +66,12 @@ class Manager extends Component
         $year = AcademicYear::findOrFail($id);
 
         if ($year->is_active) {
-            session()->flash('error', 'Tahun ajaran yang sedang aktif tidak bisa dihapus.');
+            $this->dispatch('toast', type: 'error', message: 'Tahun ajaran yang sedang aktif tidak bisa dihapus.');
             return;
         }
 
         $year->delete();
+        $this->dispatch('toast', type: 'success', message: "{$year->label} dihapus.");
     }
 
     public function render()
