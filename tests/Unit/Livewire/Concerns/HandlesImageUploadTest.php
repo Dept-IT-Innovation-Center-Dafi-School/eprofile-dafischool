@@ -19,6 +19,14 @@ class HandlesImageUploadTest extends TestCase
 
         $this->uploader = new class {
             use HandlesImageUpload;
+
+            public mixed $image = null;
+            public ?string $existingImage = null;
+
+            public function resolve(string $directory): ?string
+            {
+                return $this->resolveImageUrl($directory);
+            }
         };
     }
 
@@ -58,5 +66,38 @@ class HandlesImageUploadTest extends TestCase
         $this->uploader->deleteImageIfExists('https://example.com/not-a-storage-path.jpg');
 
         Storage::disk('public')->assertExists('facilities/example.jpg');
+    }
+
+    public function test_resolve_image_url_uploads_new_file_and_deletes_the_old_one(): void
+    {
+        Storage::disk('public')->put('facilities/old.jpg', 'contents');
+        $this->uploader->existingImage = Storage::disk('public')->url('facilities/old.jpg');
+        $this->uploader->image = UploadedFile::fake()->create('new.jpg', 10, 'image/jpeg');
+
+        $url = $this->uploader->resolve('facilities');
+
+        $this->assertStringContainsString('/storage/facilities/', $url);
+        Storage::disk('public')->assertMissing('facilities/old.jpg');
+    }
+
+    public function test_resolve_image_url_keeps_existing_image_when_untouched(): void
+    {
+        $this->uploader->existingImage = 'https://example.com/storage/facilities/keep.jpg';
+
+        $url = $this->uploader->resolve('facilities');
+
+        $this->assertSame('https://example.com/storage/facilities/keep.jpg', $url);
+    }
+
+    public function test_resolve_image_url_returns_null_and_deletes_file_when_removed(): void
+    {
+        Storage::disk('public')->put('facilities/remove-me.jpg', 'contents');
+        $this->uploader->existingImage = Storage::disk('public')->url('facilities/remove-me.jpg');
+        $this->uploader->removeExistingImage();
+
+        $url = $this->uploader->resolve('facilities');
+
+        $this->assertNull($url);
+        Storage::disk('public')->assertMissing('facilities/remove-me.jpg');
     }
 }

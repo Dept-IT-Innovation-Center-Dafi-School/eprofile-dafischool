@@ -46,7 +46,7 @@ trait ManagesNamedChildRecords
 
     public function startCreate()
     {
-        $this->reset(['name', 'order', 'image', 'existingImage', 'editingId']);
+        $this->reset(['name', 'order', 'image', 'existingImage', 'imageRemoved', 'editingId']);
         $this->editingId = 'new';
     }
 
@@ -58,6 +58,7 @@ trait ManagesNamedChildRecords
         $this->order = $item->order;
         $this->existingImage = $item->image;
         $this->image = null;
+        $this->imageRemoved = false;
     }
 
     public function save()
@@ -69,12 +70,7 @@ trait ManagesNamedChildRecords
             return;
         }
 
-        $imageUrl = $this->existingImage;
-
-        if ($this->image) {
-            $this->deleteImageIfExists($this->existingImage);
-            $imageUrl = $this->uploadImage($this->image, $this->uploadDirectory());
-        }
+        $imageUrl = $this->resolveImageUrl($this->uploadDirectory());
 
         if ($this->editingId === 'new') {
             $this->modelClass()::create([
@@ -98,7 +94,7 @@ trait ManagesNamedChildRecords
 
     public function cancel()
     {
-        $this->reset(['name', 'order', 'image', 'existingImage', 'editingId']);
+        $this->reset(['name', 'order', 'image', 'existingImage', 'imageRemoved', 'editingId']);
     }
 
     public function delete(int $id)

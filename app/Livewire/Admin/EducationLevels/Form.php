@@ -79,12 +79,7 @@ class Form extends Component
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        $imageUrl = $this->existingImage;
-
-        if ($this->image) {
-            $this->deleteImageIfExists($this->existingImage);
-            $imageUrl = $this->uploadImage($this->image, 'uploads/education-levels');
-        }
+        $imageUrl = $this->resolveImageUrl('uploads/education-levels');
 
         if ($this->level) {
             $this->level->update([
@@ -96,21 +91,24 @@ class Form extends Component
                 'whatsapp_number' => $this->whatsappNumber,
                 'image' => $imageUrl,
             ]);
-            $message = 'Jenjang berhasil diperbarui.';
-        } else {
-            EducationLevel::create([
-                'name' => $this->name,
-                'slug' => $this->slug,
-                'tagline' => $this->tagline,
-                'program' => $this->program,
-                'order' => $this->order,
-                'whatsapp_number' => $this->whatsappNumber,
-                'image' => $imageUrl,
-            ]);
-            $message = 'Jenjang berhasil ditambahkan.';
+            $this->existingImage = $imageUrl;
+            $this->image = null;
+            $this->imageRemoved = false;
+            $this->dispatch('toast', type: 'success', message: 'Jenjang berhasil diperbarui.');
+            return;
         }
 
-        session()->flash('success', $message);
+        EducationLevel::create([
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'tagline' => $this->tagline,
+            'program' => $this->program,
+            'order' => $this->order,
+            'whatsapp_number' => $this->whatsappNumber,
+            'image' => $imageUrl,
+        ]);
+
+        session()->flash('success', 'Jenjang berhasil ditambahkan.');
         return redirect()->route('admin.education-levels.index');
     }
 
