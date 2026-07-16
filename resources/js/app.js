@@ -1,12 +1,3 @@
-import Swiper from 'swiper';
-import { Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-
-Swiper.use([Pagination, Autoplay]);
-
-window.Swiper = Swiper;
-
 // Admin toast notifications — a global Alpine store fed either by a Livewire
 // `$this->dispatch('toast', ...)` browser event, or (for actions that redirect,
 // where no live component remains to dispatch from) an inline bootstrap script
@@ -69,23 +60,12 @@ document.addEventListener('alpine:init', () => {
     });
 });
 
-// Initialize hero swiper if element exists
+// Initialize hero swiper if element exists — Swiper is loaded on demand so
+// pages without a carousel (all of the admin panel, the login screen) don't
+// pay for its ~80KB JS + CSS on every load.
 document.addEventListener('DOMContentLoaded', () => {
-    const swiperEl = document.querySelector('.hero-swiper');
-    if (swiperEl) {
-        new Swiper('.hero-swiper', {
-            modules: [Pagination, Autoplay],
-            loop: true,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            grabCursor: true,
-        });
+    if (document.querySelector('.hero-swiper')) {
+        import('./hero-swiper.js');
     }
 });
 
