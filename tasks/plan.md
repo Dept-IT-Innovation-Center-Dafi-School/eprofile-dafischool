@@ -290,18 +290,19 @@ headline+tagline. Badge logo+nama sekolah kecil di pojok kiri atas TETAP ADA (be
 elemen, bukan teks besar yang menimpa foto).
 
 **Acceptance criteria:**
-- [ ] Blok `<h1>` "Darul Fikri" + `<p>` tagline (posisi center, absolute inset-0)
+- [x] Blok `<h1>` "Darul Fikri" + `<p>` tagline (posisi center, absolute inset-0)
       dihapus dari `home.blade.php`
-- [ ] Badge logo+nama sekolah pojok kiri atas TIDAK berubah
-- [ ] Tidak ada sisa CSS/markup mati terkait headline/tagline yang dihapus
+- [x] Badge logo+nama sekolah pojok kiri atas TIDAK berubah
+- [x] Tidak ada sisa CSS/markup mati terkait headline/tagline yang dihapus
+      (`<h1 class="sr-only">` dikembalikan untuk a11y/SEO, sama seperti sebelum Task 4)
 
 **Verification:**
-- [ ] Test direvisi di `tests/Feature/HomePageHeroTest.php`:
-      `test_shows_visible_headline_and_tagline` diganti jadi assert tagline text
-      ("Pendidikan berkualitas dari RTK hingga SMA") TIDAK muncul lagi di halaman
-- [ ] `composer run test` hijau, `vendor/bin/pint` bersih, `npm run build` sukses
+- [x] Test direvisi di `tests/Feature/HomePageHeroTest.php`: `test_shows_visible_headline_and_tagline`
+      diganti jadi `test_does_not_show_headline_or_tagline_overlay` (assert tagline TIDAK muncul)
+      + `test_still_shows_logo_badge_without_headline` (assert badge logo tetap ada)
+- [x] `composer run test` hijau (70/70), `vendor/bin/pint` bersih, `npm run build` sukses
 - [ ] Manual: buka `/`, pastikan tidak ada teks besar di tengah foto, badge logo
-      pojok kiri atas masih ada
+      pojok kiri atas masih ada (belum dicek visual)
 
 **Dependencies:** Task 4 (revisi langsung di atas hasil task itu)
 
@@ -323,16 +324,17 @@ mengisi ruang kosong di desktop — sudah tidak diperlukan karena foto utama sek
 selalu full-bleed.
 
 **Acceptance criteria:**
-- [ ] Foto utama slide pakai `object-cover` di semua breakpoint (hapus `lg:object-contain`)
-- [ ] `<img>` blurred-backdrop duplikat dihapus total dari markup
-- [ ] Foto selalu memenuhi 1 layar penuh (`w-full h-full`) tanpa letterbox di desktop
+- [x] Foto utama slide pakai `object-cover` di semua breakpoint (hapus `lg:object-contain`)
+- [x] `<img>` blurred-backdrop duplikat dihapus total dari markup
+- [x] Foto selalu memenuhi 1 layar penuh (`w-full h-full`) tanpa letterbox di desktop
 
 **Verification:**
-- [ ] Test direvisi di `tests/Feature/HomePageHeroTest.php`: assert markup TIDAK
-      mengandung `lg:object-contain` atau `blur-2xl` (backdrop duplikat) lagi
-- [ ] `composer run test` hijau, `vendor/bin/pint` bersih, `npm run build` sukses
+- [x] Test baru `test_slide_photo_is_full_bleed_on_all_breakpoints` di
+      `tests/Feature/HomePageHeroTest.php`: assert markup TIDAK mengandung
+      `lg:object-contain` atau `blur-2xl` (backdrop duplikat) lagi
+- [x] `composer run test` hijau (71/71), `vendor/bin/pint` bersih, `npm run build` sukses
 - [ ] Manual: buka `/` di lebar layar desktop, pastikan foto full-bleed tanpa area
-      kosong/blur di sisi kiri-kanan
+      kosong/blur di sisi kiri-kanan (belum dicek visual)
 
 **Dependencies:** Task 8 (sama-sama menyentuh `home.blade.php`, dikerjakan sequential)
 
