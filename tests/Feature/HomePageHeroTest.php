@@ -53,13 +53,22 @@ class HomePageHeroTest extends TestCase
         $response->assertSee('Darul Fikri', false);
     }
 
-    public function test_shows_visible_headline_and_tagline(): void
+    public function test_does_not_show_headline_or_tagline_overlay(): void
     {
         $response = $this->get(route('home'));
 
         $response->assertOk();
-        $response->assertDontSee('sr-only', false);
-        $response->assertSee('Pendidikan berkualitas dari RTK hingga SMA', false);
+        $response->assertDontSee('Sekolah Islam Terpadu — Pendidikan', false);
+    }
+
+    public function test_still_shows_logo_badge_without_headline(): void
+    {
+        SchoolSetting::current()->update(['logo' => 'https://example.test/storage/uploads/school-settings/logo.png']);
+
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertSee('id="hero-logo"', false);
     }
 
     public function test_shows_numbered_pagination_counter_matching_slide_count(): void

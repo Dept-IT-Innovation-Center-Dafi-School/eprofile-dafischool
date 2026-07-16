@@ -8,16 +8,7 @@
             <span class="text-white font-display font-bold text-sm sm:text-base">Darul Fikri</span>
         </div>
 
-        <div class="absolute inset-0 z-20 flex items-center justify-center px-4 pointer-events-none">
-            <div class="text-center animate-hero-fade-in">
-                <h1 class="font-display text-3xl sm:text-5xl font-extrabold text-white drop-shadow-lg">
-                    Darul Fikri
-                </h1>
-                <p class="mt-2 text-sm sm:text-lg text-white/90 max-w-xl mx-auto drop-shadow">
-                    Sekolah Islam Terpadu — Pendidikan berkualitas dari RTK hingga SMA
-                </p>
-            </div>
-        </div>
+        <h1 class="sr-only">Darul Fikri - Sekolah Islam Terpadu</h1>
 
         <div class="swiper hero-swiper h-screen w-full">
             <div class="swiper-wrapper">
