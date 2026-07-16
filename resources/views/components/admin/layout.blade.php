@@ -100,20 +100,20 @@
         </div>
     </div>
 
-    <x-admin.toast-stack />
-    <x-admin.confirm-dialog />
-
     @if (session('success') || session('error'))
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                @if (session('success'))
-                    Alpine.store('toast').push('success', @js(session('success')));
-                @endif
-                @if (session('error'))
-                    Alpine.store('toast').push('error', @js(session('error')));
-                @endif
-            });
+            // Set synchronously, before Alpine boots — read by toast-stack's
+            // x-init once Alpine initializes, so this never races Alpine's
+            // own (possibly deferred) startup like a DOMContentLoaded
+            // listener touching Alpine.store() directly would.
+            window.__flashToasts = [
+                @if (session('success')) { type: 'success', message: @js(session('success')) }, @endif
+                @if (session('error')) { type: 'error', message: @js(session('error')) }, @endif
+            ];
         </script>
     @endif
+
+    <x-admin.toast-stack />
+    <x-admin.confirm-dialog />
 </body>
 </html>
