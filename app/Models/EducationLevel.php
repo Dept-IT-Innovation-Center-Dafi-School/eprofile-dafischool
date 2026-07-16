@@ -43,7 +43,7 @@ class EducationLevel extends Model
     // WhatsApp message accessor
     public function getWhatsappUrlAttribute(): string
     {
-        $waNumber = $this->whatsapp_number ?: config('school.whatsapp_number');
+        $waNumber = $this->whatsapp_number ?: SchoolSetting::current()->whatsapp_number;
         $message = "Assalamu'alaikum, saya ingin mendaftarkan anak saya di jenjang {$this->name} Darul Fikri.";
         return "https://wa.me/{$waNumber}?text=" . urlencode($message);
     }

@@ -1,4 +1,4 @@
-<x-layout :title="$level->name . ' - Darul Fikri'" :description="$level->tagline">
+<x-layout :title="$level->name . ' - Darul Fikri'" :description="$level->tagline" :showFooter="true">
     <main>
         <!-- Hero section -->
         <section class="max-w-6xl mx-auto px-4 pt-6">

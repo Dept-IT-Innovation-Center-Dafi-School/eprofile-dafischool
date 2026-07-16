@@ -40,6 +40,7 @@
                         ['route' => 'admin.education-levels.index', 'active' => 'admin.education-levels.*', 'icon' => 'academic-cap', 'label' => 'Jenjang Pendidikan'],
                         ['route' => 'admin.hero-slides.index', 'active' => 'admin.hero-slides.*', 'icon' => 'photo', 'label' => 'Carousel Beranda'],
                         ['route' => 'admin.academic-years.index', 'active' => 'admin.academic-years.*', 'icon' => 'calendar', 'label' => 'Tahun Ajaran'],
+                        ['route' => 'admin.settings', 'active' => 'admin.settings', 'icon' => 'cog', 'label' => 'Pengaturan Sekolah'],
                     ];
                 @endphp
                 @foreach ($navItems as $item)

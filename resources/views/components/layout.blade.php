@@ -15,6 +15,10 @@
 <body class="font-sans bg-white text-slate-800 antialiased">
     {{ $slot }}
 
+    @if($showFooter ?? false)
+        <x-footer />
+    @endif
+
     <x-lightbox />
     @if($showBackToTop ?? true)
         <x-back-to-top />

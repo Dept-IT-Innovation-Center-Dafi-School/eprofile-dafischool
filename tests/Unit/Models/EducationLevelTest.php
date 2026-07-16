@@ -3,6 +3,7 @@
 namespace Tests\Unit\Models;
 
 use App\Models\EducationLevel;
+use App\Models\SchoolSetting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,7 +13,7 @@ class EducationLevelTest extends TestCase
 
     public function test_whatsapp_url_contains_encoded_message_with_level_name(): void
     {
-        config(['school.whatsapp_number' => '6281111111111']);
+        SchoolSetting::current()->update(['whatsapp_number' => '6281111111111']);
 
         $level = new EducationLevel(['name' => 'SD']);
 

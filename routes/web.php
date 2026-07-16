@@ -36,5 +36,7 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
 
     Route::get('/academic-years', \App\Livewire\Admin\AcademicYears\Manager::class)->name('academic-years.index');
 
+    Route::get('/settings', \App\Livewire\Admin\Settings\Manager::class)->name('settings');
+
     Route::get('/account', \App\Livewire\Admin\Account\Manager::class)->name('account');
 });
