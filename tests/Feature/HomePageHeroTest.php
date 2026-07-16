@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\HeroSlide;
 use App\Models\SchoolSetting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -59,5 +60,18 @@ class HomePageHeroTest extends TestCase
         $response->assertOk();
         $response->assertDontSee('sr-only', false);
         $response->assertSee('Pendidikan berkualitas dari RTK hingga SMA', false);
+    }
+
+    public function test_shows_numbered_pagination_counter_matching_slide_count(): void
+    {
+        HeroSlide::create(['alt' => 'Slide 1', 'order' => 0]);
+        HeroSlide::create(['alt' => 'Slide 2', 'order' => 1]);
+        HeroSlide::create(['alt' => 'Slide 3', 'order' => 2]);
+
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertSee('hero-counter-current', false);
+        $response->assertSee('class="hero-counter-total">03', false);
     }
 }

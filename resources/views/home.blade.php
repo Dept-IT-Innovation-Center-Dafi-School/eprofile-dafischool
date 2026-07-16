@@ -43,6 +43,14 @@
             </div>
 
             <div class="swiper-pagination"></div>
+
+            @if ($slides->count() > 1)
+                <div class="hero-counter absolute bottom-5 left-1/2 -translate-x-1/2 z-40 font-display text-xs sm:text-sm font-semibold tracking-widest text-white/80" aria-hidden="true">
+                    <span class="hero-counter-current text-white">01</span>
+                    <span>/</span>
+                    <span class="hero-counter-total">{{ str_pad($slides->count(), 2, '0', STR_PAD_LEFT) }}</span>
+                </div>
+            @endif
         </div>
 
         <!-- CTA button -->
