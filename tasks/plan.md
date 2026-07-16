@@ -214,7 +214,7 @@ edit file yang sama.
 
 ---
 
-## Task 6: Ken Burns effect + `prefers-reduced-motion` guard
+## Task 6: Ken Burns effect + `prefers-reduced-motion` guard — ⚠️ DIREVISI, lihat Task 7
 
 **Description:** Tambah efek zoom pelan (Ken Burns, `scale(1) → scale(1.08)`) pada
 foto slide yang sedang aktif, definisikan keyframes di `@layer components` pada
@@ -247,12 +247,53 @@ dikerjakan sequential supaya tidak konflik)
 
 ---
 
+## Task 7: Cabut efek Ken Burns dari foto slide (revisi Task 6)
+
+**Description:** Tim marketing mengonfirmasi foto yang akan dipakai di hero sudah
+diedit dengan teks tertanam di dalam gambar (mis. nama gedung/fasilitas). Efek zoom
+Ken Burns dari Task 6 bikin teks itu sulit dibaca selagi foto bergerak — berpotensi
+bikin user (dan tim marketing) komplain. Cabut total efeknya, foto slide jadi statis.
+
+**Acceptance criteria:**
+- [ ] Class `animate-kenburns` dihapus dari `<img>` foto slide di `home.blade.php`
+- [ ] Keyframes `hero-kenburns` dan class `.animate-kenburns` (termasuk guard
+      `prefers-reduced-motion`-nya) dihapus dari `app.css` — bukan sekadar di-disable
+- [ ] Foto slide tidak punya `transform`/`animation` apa pun yang membuatnya bergerak
+- [ ] Elemen lain (logo/headline fade-in, pagination counter, blurred backdrop
+      `scale-110` statis) TIDAK berubah — revisi ini hanya menyentuh foto slide
+
+**Verification:**
+- [ ] Test direvisi di `tests/Feature/HomePageHeroTest.php`: ganti
+      `test_slide_photo_has_ken_burns_animation_class` jadi
+      `test_slide_photo_has_no_zoom_or_animation_class` yang assert `animate-kenburns`
+      TIDAK muncul di response
+- [ ] `composer run test` hijau, `vendor/bin/pint` bersih, `npm run build` sukses
+- [ ] Manual: buka `/`, pastikan foto benar-benar statis (gak ada gerakan sama sekali)
+
+**Dependencies:** Task 6 (revisi langsung di atas hasil task itu)
+
+**Files likely touched:**
+- `resources/views/home.blade.php`
+- `resources/css/app.css`
+- `tests/Feature/HomePageHeroTest.php`
+
+**Estimated scope:** XS (3 files)
+
+---
+
 ## Risks and Mitigations
 | Risk | Impact | Mitigation |
 |------|--------|------------|
 | `HandlesImageUpload` didesain untuk 1 gambar/komponen — aman untuk logo (cuma 1 gambar), tapi tidak langsung reusable kalau Settings butuh field gambar ke-2 nanti | Low | Dicatat di Task 3, bukan blocker sekarang |
-| Ken Burns + fade-in adalah pola CSS baru, belum ada preseden di repo | Medium | Task 6 dipisah & diverifikasi manual khusus, ikuti struktur `@layer components` yang sudah ada |
+| Fade-in adalah pola CSS baru, belum ada preseden di repo | Medium | Diverifikasi manual khusus, ikuti struktur `@layer components` yang sudah ada |
 | Copy headline/tagline final belum dikonfirmasi tim marketing | Low | Task 4 pakai teks yang sudah ada di kode sekarang, gampang diganti kalau ada copy baru |
+| ~~Ken Burns bikin teks di foto sulit dibaca~~ **TERJADI** — foto marketing sudah ada teks tertanam | — | Direvisi via Task 7: efek dicabut total, foto slide statis |
 
 ## Open Questions
 - Konfirmasi copy headline/tagline final dari tim marketing (lihat `docs/spec-homepage-hero-polish.md`).
+
+## Revision Log
+- **2026-07-16:** Task 6 (Ken Burns zoom effect) dicabut via Task 7. Tim marketing
+  mengonfirmasi foto hero sudah diedit dengan teks tertanam (nama gedung/fasilitas),
+  sehingga efek zoom bikin teks itu sulit dibaca. Spec di `docs/spec-homepage-hero-polish.md`
+  diperbarui: foto slide sekarang eksplisit harus statis, tanpa transform/animation apa pun.
