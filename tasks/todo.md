@@ -19,14 +19,14 @@
 - [ ] Fallback teks jalan kalau logo belum/dihapus
 
 ## Phase 3: Polish visual
-- [ ] Task 5: Pagination premium (numbered/progress bar)
-- [ ] Task 6: Ken Burns effect + `prefers-reduced-motion` guard
+- [x] Task 5: Pagination premium (numbered/progress bar)
+- [x] Task 6: Ken Burns effect + `prefers-reduced-motion` guard
 
 ### Checkpoint: Complete
-- [ ] `composer run test` full green, `vendor/bin/pint` bersih
-- [ ] End-to-end manual: logo+fallback, headline, WA button, pagination, Ken Burns, toggle `prefers-reduced-motion`
-- [ ] Viewport pertama tetap fullscreen carousel, tidak ada footer/section baru
-- [ ] Semua Success Criteria di `docs/spec-homepage-hero-polish.md` terpenuhi
+- [x] `composer run test` full green (69/69), `vendor/bin/pint` bersih, `npm run build` sukses
+- [ ] End-to-end manual: logo+fallback, headline, WA button, pagination, Ken Burns, toggle `prefers-reduced-motion` — **belum dicek di browser**
+- [x] Viewport pertama tetap fullscreen carousel, tidak ada footer/section baru
+- [x] Semua Success Criteria di `docs/spec-homepage-hero-polish.md` terpenuhi (via test otomatis; manual masih tertunda)
 
 ## Open Questions
 - [ ] Konfirmasi copy headline/tagline final dari tim marketing

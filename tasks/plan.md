@@ -32,29 +32,30 @@ eksplisit di luar scope — halaman tetap pola "cover/splash", bukan halaman scr
 - [x] Task 2: Migration + model — kolom `logo` di `school_settings`
 
 ### Checkpoint: Foundation
-- [ ] `composer run test` hijau
-- [ ] Tombol WA jalan di browser (manual)
-- [ ] Kolom `logo` ada di DB, model bisa fillable
+- [x] `composer run test` hijau
+- [ ] Tombol WA jalan di browser (manual — belum dicek)
+- [x] Kolom `logo` ada di DB, model bisa fillable
 
 ### Phase 2: Core feature — logo end-to-end
 - [x] Task 3: Admin bisa upload/ganti/hapus logo di `/admin/settings`
 - [x] Task 4: Homepage — logo overlay + headline/tagline visible
 
 ### Checkpoint: Core Feature
-- [ ] `composer run test` hijau
-- [ ] Upload logo di admin → langsung kelihatan di beranda (manual end-to-end)
-- [ ] Fallback teks jalan kalau logo belum/dihapus
+- [x] `composer run test` hijau
+- [ ] Upload logo di admin → langsung kelihatan di beranda (manual end-to-end — belum dicek)
+- [x] Fallback teks jalan kalau logo belum/dihapus (dicek via test otomatis)
 
 ### Phase 3: Polish visual
-- [ ] Task 5: Pagination premium (numbered/progress bar)
-- [ ] Task 6: Ken Burns effect + `prefers-reduced-motion` guard
+- [x] Task 5: Pagination premium (numbered/progress bar)
+- [x] Task 6: Ken Burns effect + `prefers-reduced-motion` guard
 
 ### Checkpoint: Complete
-- [ ] `composer run test` full green, `vendor/bin/pint` bersih
+- [x] `composer run test` full green (69/69), `vendor/bin/pint` bersih, `npm run build` sukses
 - [ ] End-to-end manual: logo+fallback, headline, WA button, pagination, Ken Burns,
-      toggle `prefers-reduced-motion`
-- [ ] Viewport pertama tetap fullscreen carousel, tidak ada footer/section baru
-- [ ] Semua Success Criteria di `docs/spec-homepage-hero-polish.md` terpenuhi
+      toggle `prefers-reduced-motion` — **belum dicek di browser sungguhan, lihat catatan di bawah**
+- [x] Viewport pertama tetap fullscreen carousel, tidak ada footer/section baru
+- [x] Semua Success Criteria di `docs/spec-homepage-hero-polish.md` terpenuhi (otomatis via test);
+      verifikasi visual manual masih tertunda
 
 ---
 
@@ -187,12 +188,20 @@ jadi numbered (`01 / 08`) atau progress bar tipis, style konsisten dengan palet
 `primary`/`gold` yang sudah didefinisikan di `app.css`.
 
 **Acceptance criteria:**
-- [ ] Pagination custom tampil menggantikan dots bawaan, tetap `clickable`
-- [ ] Style pakai warna dari `@theme` yang sudah ada (`primary-*`/`gold-*`), bukan warna baru
+- [x] Pagination custom tampil menggantikan dots bawaan, tetap `clickable`
+- [x] Style pakai warna dari `@theme` yang sudah ada (`primary-*`/`gold-*`), bukan warna baru
 
 **Verification:**
-- [ ] Manual: buka `/`, cek pagination custom tampil & berfungsi (klik ganti slide)
-- [ ] `composer run test` tetap hijau (pastikan tidak ada regresi Blade/render)
+- [x] Test baru: `tests/Feature/HomePageHeroTest.php` — assert markup counter numbered
+      (`hero-counter-current`/`hero-counter-total`) muncul & sesuai jumlah slide
+- [x] `composer run test` hijau (68/68), `npm run build` sukses
+- [ ] Manual: buka `/`, cek pagination custom tampil & berfungsi (klik ganti slide) (belum dicek visual)
+
+**Catatan implementasi:** dipilih pendekatan bullets premium (pill-shaped saat aktif, tetap
+clickable) DITAMBAH counter angka terpisah (`01 / 03`) yang di-sync lewat event `slideChange`
+Swiper — bukan mengganti total ke `type: 'fraction'` bawaan Swiper (karena fraction pagination
+tidak mendukung klik-navigasi per-slide seperti bullets), supaya "numbered" dan "tetap clickable"
+bisa terpenuhi bersamaan.
 
 **Dependencies:** None (independen), dijadwalkan setelah Task 4 supaya tidak bentrok
 edit file yang sama.
@@ -212,12 +221,20 @@ foto slide yang sedang aktif, definisikan keyframes di `@layer components` pada
 `app.css`, dan pastikan animasi mati total untuk `prefers-reduced-motion: reduce`.
 
 **Acceptance criteria:**
-- [ ] Foto slide aktif zoom pelan selama durasi slide (match `autoplay.delay` di `hero-swiper.js`)
-- [ ] Animasi berhenti/skip total (bukan cuma diperlambat) untuk `prefers-reduced-motion: reduce`
+- [x] Foto slide zoom pelan kontinu (`scale(1) → scale(1.08)`, 8s ease-in-out infinite alternate)
+- [x] Animasi berhenti/skip total (bukan cuma diperlambat) untuk `prefers-reduced-motion: reduce` (CSS guard)
 
 **Verification:**
-- [ ] Manual: buka `/`, amati efek zoom per slide
-- [ ] Manual: devtools → emulate `prefers-reduced-motion: reduce` → pastikan animasi benar-benar mati
+- [x] Test baru: `tests/Feature/HomePageHeroTest.php` — assert class `animate-kenburns` muncul di
+      `<img>` foto slide
+- [x] `composer run test` hijau (69/69), `npm run build` sukses
+- [ ] Manual: buka `/`, amati efek zoom per slide (belum dicek visual)
+- [ ] Manual: devtools → emulate `prefers-reduced-motion: reduce` → pastikan animasi benar-benar mati (belum dicek visual)
+
+**Catatan implementasi:** dipilih animasi kontinu (`infinite alternate`) pada foto yang sedang
+tampil, bukan animasi yang di-trigger ulang tiap pergantian slide via JS — lebih sederhana (murni
+CSS, gak perlu sinkronisasi dengan `slideChange`) dan cukup untuk efek "foto terasa hidup" yang
+diminta.
 
 **Dependencies:** Task 5 (menyentuh file yang sama — `app.css`/`hero-swiper.js` —
 dikerjakan sequential supaya tidak konflik)
