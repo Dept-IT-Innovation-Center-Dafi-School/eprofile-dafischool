@@ -39,12 +39,27 @@ class FacilitiesManagerAcademicYearTest extends TestCase
             ->call('startCreate')
             ->set('name', 'Perpustakaan')
             ->call('save')
-            ->assertHasNoErrors();
+            ->assertHasNoErrors()
+            ->assertDispatched('toast', type: 'success');
 
         $this->assertDatabaseHas('facilities', [
             'name' => 'Perpustakaan',
             'academic_year_id' => $year->id,
         ]);
+    }
+
+    public function test_deleting_a_facility_dispatches_a_toast(): void
+    {
+        $user = User::factory()->create();
+        $year = AcademicYear::create(['label' => '2026/2027', 'is_active' => true]);
+        $facility = $this->level->facilities()->create(['name' => 'Kantin', 'order' => 0, 'academic_year_id' => $year->id]);
+
+        Livewire::actingAs($user)
+            ->test(Manager::class, ['educationLevelId' => $this->level->id])
+            ->call('delete', $facility->id)
+            ->assertDispatched('toast', type: 'success');
+
+        $this->assertDatabaseMissing('facilities', ['id' => $facility->id]);
     }
 
     public function test_facility_list_is_scoped_to_the_current_academic_year(): void

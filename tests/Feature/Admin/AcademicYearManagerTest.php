@@ -20,7 +20,8 @@ class AcademicYearManagerTest extends TestCase
 
         Livewire::actingAs($user)
             ->test(Manager::class)
-            ->call('create');
+            ->call('create')
+            ->assertDispatched('toast', type: 'success');
 
         $this->assertDatabaseHas('academic_years', ['label' => '2027/2028']);
     }
@@ -47,7 +48,8 @@ class AcademicYearManagerTest extends TestCase
 
         Livewire::actingAs($user)
             ->test(Manager::class)
-            ->call('setActive', $new->id);
+            ->call('setActive', $new->id)
+            ->assertDispatched('toast', type: 'success');
 
         $this->assertTrue($new->fresh()->is_active);
         $this->assertFalse($old->fresh()->is_active);
@@ -60,7 +62,8 @@ class AcademicYearManagerTest extends TestCase
 
         Livewire::actingAs($user)
             ->test(Manager::class)
-            ->call('delete', $active->id);
+            ->call('delete', $active->id)
+            ->assertDispatched('toast', type: 'error');
 
         $this->assertDatabaseHas('academic_years', ['id' => $active->id]);
     }
