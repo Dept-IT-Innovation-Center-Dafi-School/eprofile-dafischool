@@ -1,8 +1,10 @@
 <div class="max-w-3xl space-y-6" @if($level) x-data="{ tab: 'info' }" @endif>
-    <div class="flex items-center justify-end">
-        <a href="{{ route('admin.education-levels.index') }}"
-           class="text-sm text-slate-600 hover:text-slate-900">← Kembali</a>
-    </div>
+    <a href="{{ route('admin.education-levels.index') }}"
+       class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-primary-700 transition"
+       aria-label="Kembali ke daftar jenjang pendidikan">
+        <x-admin.icon name="arrow-left" class="w-4 h-4" />
+        Jenjang Pendidikan
+    </a>
 
     @if ($level)
         <div class="border-b border-slate-200">
