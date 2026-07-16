@@ -98,8 +98,8 @@
                                 aria-label="Edit {{ $stat->name }}">
                             <x-admin.icon name="pencil" class="w-4 h-4" />
                         </button>
-                        <button wire:click="delete({{ $stat->id }})"
-                                wire:confirm="Hapus? Tindakan tidak bisa dibatalkan."
+                        <button type="button"
+                                x-on:click="$store.confirm.show({ message: 'Hapus {{ $stat->name }}? Tindakan tidak bisa dibatalkan.', onConfirm: () => $wire.delete({{ $stat->id }}) })"
                                 class="p-2 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 transition"
                                 aria-label="Hapus {{ $stat->name }}">
                             <x-admin.icon name="trash" class="w-4 h-4" />
