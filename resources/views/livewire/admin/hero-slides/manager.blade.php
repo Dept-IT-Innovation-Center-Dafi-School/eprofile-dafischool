@@ -89,7 +89,7 @@
                                 <x-admin.icon name="pencil" class="w-4 h-4" />
                             </button>
                             <button type="button"
-                                    x-on:click="$store.confirm.show({ message: 'Hapus slide ini? Tindakan tidak bisa dibatalkan.', onConfirm: () => $wire.delete({{ $slide->id }}) })"
+                                    x-on:click="$store.confirm.show({ title: 'Hapus slide ini?', message: 'Data yang sudah dihapus tidak dapat dikembalikan. Ketik HAPUS di bawah untuk konfirmasi.', confirmText: 'HAPUS', onConfirm: () => $wire.delete({{ $slide->id }}) })"
                                     class="p-1.5 rounded-md bg-white/90 backdrop-blur text-slate-700 hover:text-red-600 shadow-sm transition"
                                     aria-label="Hapus slide {{ $slide->alt ?: $slide->id }}">
                                 <x-admin.icon name="trash" class="w-4 h-4" />

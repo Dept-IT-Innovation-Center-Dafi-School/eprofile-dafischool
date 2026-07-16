@@ -29,22 +29,40 @@ document.addEventListener('alpine:init', () => {
 
     Alpine.store('confirm', {
         open: false,
+        title: '',
         message: '',
         confirmLabel: 'Hapus',
         variant: 'danger',
+        confirmText: null,
+        typed: '',
+        loading: false,
         onConfirm: null,
-        show({ message, confirmLabel = 'Hapus', variant = 'danger', onConfirm }) {
+        show({ title = '', message, confirmLabel = 'Hapus', variant = 'danger', confirmText = null, onConfirm }) {
+            this.title = title;
             this.message = message;
             this.confirmLabel = confirmLabel;
             this.variant = variant;
+            this.confirmText = confirmText;
+            this.typed = '';
+            this.loading = false;
             this.onConfirm = onConfirm;
             this.open = true;
         },
-        confirm() {
-            if (this.onConfirm) this.onConfirm();
+        get canConfirm() {
+            return !this.loading && (this.confirmText === null || this.typed === this.confirmText);
+        },
+        async confirm() {
+            if (!this.canConfirm || !this.onConfirm) return;
+            this.loading = true;
+            try {
+                await this.onConfirm();
+            } finally {
+                this.loading = false;
+            }
             this.close();
         },
         close() {
+            if (this.loading) return;
             this.open = false;
             this.onConfirm = null;
         },
