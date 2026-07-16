@@ -255,20 +255,20 @@ Ken Burns dari Task 6 bikin teks itu sulit dibaca selagi foto bergerak — berpo
 bikin user (dan tim marketing) komplain. Cabut total efeknya, foto slide jadi statis.
 
 **Acceptance criteria:**
-- [ ] Class `animate-kenburns` dihapus dari `<img>` foto slide di `home.blade.php`
-- [ ] Keyframes `hero-kenburns` dan class `.animate-kenburns` (termasuk guard
+- [x] Class `animate-kenburns` dihapus dari `<img>` foto slide di `home.blade.php`
+- [x] Keyframes `hero-kenburns` dan class `.animate-kenburns` (termasuk guard
       `prefers-reduced-motion`-nya) dihapus dari `app.css` — bukan sekadar di-disable
-- [ ] Foto slide tidak punya `transform`/`animation` apa pun yang membuatnya bergerak
-- [ ] Elemen lain (logo/headline fade-in, pagination counter, blurred backdrop
+- [x] Foto slide tidak punya `transform`/`animation` apa pun yang membuatnya bergerak
+- [x] Elemen lain (logo/headline fade-in, pagination counter, blurred backdrop
       `scale-110` statis) TIDAK berubah — revisi ini hanya menyentuh foto slide
 
 **Verification:**
-- [ ] Test direvisi di `tests/Feature/HomePageHeroTest.php`: ganti
+- [x] Test direvisi di `tests/Feature/HomePageHeroTest.php`: ganti
       `test_slide_photo_has_ken_burns_animation_class` jadi
       `test_slide_photo_has_no_zoom_or_animation_class` yang assert `animate-kenburns`
       TIDAK muncul di response
-- [ ] `composer run test` hijau, `vendor/bin/pint` bersih, `npm run build` sukses
-- [ ] Manual: buka `/`, pastikan foto benar-benar statis (gak ada gerakan sama sekali)
+- [x] `composer run test` hijau (69/69), `vendor/bin/pint` bersih, `npm run build` sukses
+- [ ] Manual: buka `/`, pastikan foto benar-benar statis (gak ada gerakan sama sekali) (belum dicek visual)
 
 **Dependencies:** Task 6 (revisi langsung di atas hasil task itu)
 

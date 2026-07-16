@@ -23,13 +23,13 @@
 - [x] ~~Task 6: Ken Burns effect + `prefers-reduced-motion` guard~~ — direvisi, lihat Task 7
 
 ## Phase 4: Revisi
-- [ ] Task 7: Cabut efek Ken Burns dari foto slide (foto marketing sudah ada teks tertanam)
+- [x] Task 7: Cabut efek Ken Burns dari foto slide (foto marketing sudah ada teks tertanam)
 
 ### Checkpoint: Complete
-- [ ] `composer run test` full green, `vendor/bin/pint` bersih, `npm run build` sukses (recheck setelah Task 7)
+- [x] `composer run test` full green (69/69), `vendor/bin/pint` bersih, `npm run build` sukses
 - [ ] End-to-end manual: logo+fallback, headline, WA button, pagination, foto statis (tanpa zoom), toggle `prefers-reduced-motion` — **belum dicek di browser**
 - [x] Viewport pertama tetap fullscreen carousel, tidak ada footer/section baru
-- [ ] Semua Success Criteria di `docs/spec-homepage-hero-polish.md` terpenuhi (recheck setelah Task 7)
+- [x] Semua Success Criteria di `docs/spec-homepage-hero-polish.md` terpenuhi (via test otomatis; manual masih tertunda)
 
 ## Open Questions
 - [ ] Konfirmasi copy headline/tagline final dari tim marketing
