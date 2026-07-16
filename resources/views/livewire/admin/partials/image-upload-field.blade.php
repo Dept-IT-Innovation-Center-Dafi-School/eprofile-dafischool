@@ -5,14 +5,23 @@
     $errorId = $inputId . '-error';
 @endphp
 
-<div class="space-y-2" x-data="{ preview: null, dragging: false, existing: @js($existingImage) }">
-    <label for="{{ $inputId }}" class="block text-sm font-medium text-slate-700">{{ $label }}</label>
+<div class="space-y-2" x-data="{ preview: null, dragging: false, existing: @js($existingImage), removed: false }">
+    <div class="flex items-center justify-between gap-2">
+        <label for="{{ $inputId }}" class="block text-sm font-medium text-slate-700">{{ $label }}</label>
+        <button type="button"
+                x-show="(preview || existing) && !removed"
+                x-on:click="preview = null; existing = null; removed = true"
+                wire:click="removeExistingImage"
+                class="text-xs font-medium text-red-600 hover:text-red-700">
+            Hapus gambar
+        </button>
+    </div>
 
     <div class="relative rounded-lg border-2 border-dashed transition overflow-hidden"
          :class="dragging ? 'border-primary-400 bg-primary-50' : 'border-slate-300 hover:border-primary-300'">
         <input type="file" id="{{ $inputId }}" wire:model="{{ $modelName }}" accept="image/*"
                @error($modelName) aria-invalid="true" aria-describedby="{{ $errorId }}" @enderror
-               @change="preview = $event.target.files[0] ? URL.createObjectURL($event.target.files[0]) : preview"
+               @change="preview = $event.target.files[0] ? URL.createObjectURL($event.target.files[0]) : preview; removed = false"
                @dragover.prevent="dragging = true" @dragleave.prevent="dragging = false" @drop="dragging = false"
                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
 
@@ -30,6 +39,8 @@
             </div>
         </template>
     </div>
+
+    <p class="text-xs text-amber-600" x-show="removed">Gambar akan dihapus setelah disimpan.</p>
 
     <div wire:loading wire:target="{{ $modelName }}" class="text-sm text-slate-500" role="status">
         Mengunggah...

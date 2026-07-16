@@ -54,7 +54,7 @@
                             <x-admin.icon name="pencil" class="w-4 h-4" />
                         </a>
                         <button type="button"
-                                x-on:click="$store.confirm.show({ message: 'Hapus \'{{ $level->name }}\'? Tindakan tidak bisa dibatalkan.', onConfirm: () => $wire.deleteLevel({{ $level->id }}) })"
+                                x-on:click="$store.confirm.show({ title: 'Hapus {{ $level->name }}?', message: 'Data yang sudah dihapus tidak dapat dikembalikan. Ketik nama di bawah untuk konfirmasi.', confirmText: @js($level->name), onConfirm: () => $wire.deleteLevel({{ $level->id }}) })"
                                 class="p-2 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 transition"
                                 aria-label="Hapus {{ $level->name }}">
                             <x-admin.icon name="trash" class="w-4 h-4" />

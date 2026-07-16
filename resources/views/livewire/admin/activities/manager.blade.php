@@ -99,7 +99,7 @@
                             <x-admin.icon name="pencil" class="w-4 h-4" />
                         </button>
                         <button type="button"
-                                x-on:click="$store.confirm.show({ message: 'Hapus {{ $item->activity }}? Tindakan tidak bisa dibatalkan.', onConfirm: () => $wire.delete({{ $item->id }}) })"
+                                x-on:click="$store.confirm.show({ title: 'Hapus {{ $item->activity }}?', message: 'Data yang sudah dihapus tidak dapat dikembalikan. Ketik nama di bawah untuk konfirmasi.', confirmText: @js($item->activity), onConfirm: () => $wire.delete({{ $item->id }}) })"
                                 class="p-2 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 transition"
                                 aria-label="Hapus {{ $item->activity }}">
                             <x-admin.icon name="trash" class="w-4 h-4" />

@@ -41,7 +41,7 @@
                         </span>
                     @else
                         <button type="button"
-                                x-on:click="$store.confirm.show({ message: 'Jadikan {{ $year->label }} sebagai tahun ajaran aktif?', confirmLabel: 'Jadikan Aktif', variant: 'primary', onConfirm: () => $wire.setActive({{ $year->id }}) })"
+                                x-on:click="$store.confirm.show({ title: 'Jadikan {{ $year->label }} aktif?', message: 'Tahun ajaran aktif akan digunakan sebagai konteks default di seluruh panel admin.', confirmLabel: 'Jadikan Aktif', variant: 'primary', onConfirm: () => $wire.setActive({{ $year->id }}) })"
                                 class="shrink-0 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 hover:bg-primary-50 hover:text-primary-700 text-xs font-semibold transition">
                             Jadikan Aktif
                         </button>
@@ -54,7 +54,7 @@
                             <x-admin.icon name="pencil" class="w-4 h-4" />
                         </button>
                         <button type="button"
-                                x-on:click="$store.confirm.show({ message: 'Hapus {{ $year->label }}? Tindakan tidak bisa dibatalkan.', onConfirm: () => $wire.delete({{ $year->id }}) })"
+                                x-on:click="$store.confirm.show({ title: 'Hapus {{ $year->label }}?', message: 'Data yang sudah dihapus tidak dapat dikembalikan. Ketik nama di bawah untuk konfirmasi.', confirmText: @js($year->label), onConfirm: () => $wire.delete({{ $year->id }}) })"
                                 class="p-2 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 transition"
                                 aria-label="Hapus {{ $year->label }}">
                             <x-admin.icon name="trash" class="w-4 h-4" />

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Admin - Darul Fikri' }}</title>
+    <title>{{ $title ?? 'Admin - ' . config('app.name') }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 px-6 h-16 border-b border-white/10">
                 <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-gold-500 text-primary-950 font-display font-bold text-sm shrink-0">DF</span>
                 <span class="min-w-0">
-                    <span class="block font-display font-bold text-white text-sm truncate">Darul Fikri</span>
+                    <span class="block font-display font-bold text-white text-sm truncate">{{ config('app.name') }}</span>
                     <span class="block text-[11px] text-primary-300 truncate">Admin Panel</span>
                 </span>
             </a>
@@ -100,20 +100,20 @@
         </div>
     </div>
 
-    <x-admin.toast-stack />
-    <x-admin.confirm-dialog />
-
     @if (session('success') || session('error'))
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                @if (session('success'))
-                    Alpine.store('toast').push('success', @js(session('success')));
-                @endif
-                @if (session('error'))
-                    Alpine.store('toast').push('error', @js(session('error')));
-                @endif
-            });
+            // Set synchronously, before Alpine boots — read by toast-stack's
+            // x-init once Alpine initializes, so this never races Alpine's
+            // own (possibly deferred) startup like a DOMContentLoaded
+            // listener touching Alpine.store() directly would.
+            window.__flashToasts = [
+                @if (session('success')) { type: 'success', message: @js(session('success')) }, @endif
+                @if (session('error')) { type: 'error', message: @js(session('error')) }, @endif
+            ];
         </script>
     @endif
+
+    <x-admin.toast-stack />
+    <x-admin.confirm-dialog />
 </body>
 </html>

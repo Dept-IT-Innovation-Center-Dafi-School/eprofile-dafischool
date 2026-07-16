@@ -27,11 +27,11 @@
         </div>
 
         <div class="bg-white rounded-xl border border-slate-200 p-5 flex items-center gap-4">
-            <span class="flex items-center justify-center w-11 h-11 rounded-lg bg-primary-50 text-primary-700 shrink-0">
-                <x-admin.icon name="pencil" class="w-6 h-6" />
+            <span class="flex items-center justify-center w-11 h-11 rounded-lg bg-slate-100 text-slate-600 shrink-0">
+                <x-admin.icon name="squares-2x2" class="w-6 h-6" />
             </span>
             <div>
-                <p class="text-2xl font-bold text-slate-900">{{ $levels->sum(fn ($l) => $l->facilities_count + $l->class_stats_count + $l->extracurriculars_count + $l->activities_count) }}</p>
+                <p class="text-2xl font-bold text-slate-900">{{ $totalContentItems }}</p>
                 <p class="text-sm text-slate-500">Total Item Konten</p>
             </div>
         </div>

@@ -42,7 +42,7 @@ class Manager extends Component
 
     public function startCreate()
     {
-        $this->reset(['activity', 'order', 'image', 'existingImage', 'editingId']);
+        $this->reset(['activity', 'order', 'image', 'existingImage', 'imageRemoved', 'editingId']);
         $this->editingId = 'new';
     }
 
@@ -54,6 +54,7 @@ class Manager extends Component
         $this->order = $activity->order;
         $this->existingImage = $activity->image;
         $this->image = null;
+        $this->imageRemoved = false;
     }
 
     public function save()
@@ -65,12 +66,7 @@ class Manager extends Component
             return;
         }
 
-        $imageUrl = $this->existingImage;
-
-        if ($this->image) {
-            $this->deleteImageIfExists($this->existingImage);
-            $imageUrl = $this->uploadImage($this->image, 'uploads/activities');
-        }
+        $imageUrl = $this->resolveImageUrl('uploads/activities');
 
         if ($this->editingId === 'new') {
             Activity::create([
@@ -94,7 +90,7 @@ class Manager extends Component
 
     public function cancel()
     {
-        $this->reset(['activity', 'order', 'image', 'existingImage', 'editingId']);
+        $this->reset(['activity', 'order', 'image', 'existingImage', 'imageRemoved', 'editingId']);
     }
 
     public function delete(int $id)

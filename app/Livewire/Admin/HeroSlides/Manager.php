@@ -37,7 +37,7 @@ class Manager extends Component
 
     public function startCreate()
     {
-        $this->reset(['alt', 'order', 'image', 'existingImage', 'editingId']);
+        $this->reset(['alt', 'order', 'image', 'existingImage', 'imageRemoved', 'editingId']);
         $this->editingId = 'new';
     }
 
@@ -49,18 +49,14 @@ class Manager extends Component
         $this->order = $slide->order;
         $this->existingImage = $slide->image;
         $this->image = null;
+        $this->imageRemoved = false;
     }
 
     public function save()
     {
         $this->validate();
 
-        $imageUrl = $this->existingImage;
-
-        if ($this->image) {
-            $this->deleteImageIfExists($this->existingImage);
-            $imageUrl = $this->uploadImage($this->image, 'uploads/hero-slides');
-        }
+        $imageUrl = $this->resolveImageUrl('uploads/hero-slides');
 
         if ($this->editingId === 'new') {
             HeroSlide::create([
@@ -82,7 +78,7 @@ class Manager extends Component
 
     public function cancel()
     {
-        $this->reset(['alt', 'order', 'image', 'existingImage', 'editingId']);
+        $this->reset(['alt', 'order', 'image', 'existingImage', 'imageRemoved', 'editingId']);
     }
 
     public function delete(int $id)
