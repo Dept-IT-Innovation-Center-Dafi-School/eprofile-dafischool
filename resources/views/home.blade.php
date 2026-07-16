@@ -33,7 +33,7 @@
                                  class="hidden lg:block absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-50">
                             <img src="{{ $slide->image }}" alt="{{ $slide->alt }}"
                                  @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif
-                                 class="relative w-full h-full object-cover lg:object-contain animate-kenburns">
+                                 class="relative w-full h-full object-cover lg:object-contain">
                         @else
                             <x-image-placeholder :label="$slide->alt" class="w-full h-full" />
                         @endif
