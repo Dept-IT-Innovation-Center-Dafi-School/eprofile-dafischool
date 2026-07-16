@@ -8,7 +8,7 @@
 
     a:focus-visible,
     button:focus-visible {
-        outline: 3px solid #d8901f;
+        outline: 3px solid #da8c16;
         outline-offset: 2px;
     }
 
@@ -25,7 +25,7 @@
     .hero-swiper {
         --swiper-pagination-bullet-inactive-color: #ffffff;
         --swiper-pagination-bullet-inactive-opacity: 0.6;
-        --swiper-pagination-color: #d8901f;
+        --swiper-pagination-color: #da8c16;
     }
 
     .swiper-pagination-bullet {
@@ -35,7 +35,7 @@
 
     /* Soft shadow with gold glow for floating CTA */
     .shadow-glow {
-        box-shadow: 0 8px 24px -4px rgba(216, 144, 31, 0.55), 0 2px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 24px -4px rgba(218, 140, 22, 0.55), 0 2px 8px rgba(0, 0, 0, 0.15);
     }
 }
 
@@ -48,28 +48,28 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
     --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
 
-    /* Primary color (teal) */
-    --color-primary-50: #eefdf9;
-    --color-primary-100: #d3f8ec;
-    --color-primary-200: #a4f0da;
-    --color-primary-300: #6de3c4;
-    --color-primary-400: #3ecead;
-    --color-primary-500: #22b295;
-    --color-primary-600: #178f79;
-    --color-primary-700: #167262;
-    --color-primary-800: #175b4f;
-    --color-primary-900: #164b43;
-    --color-primary-950: #0d3129;
+    /* Primary color (blue) */
+    --color-primary-50: #f3f7fc;
+    --color-primary-100: #e3ecf8;
+    --color-primary-200: #c2d6f0;
+    --color-primary-300: #95b7e4;
+    --color-primary-400: #5a90d8;
+    --color-primary-500: #2b6bbf;
+    --color-primary-600: #245ba3;
+    --color-primary-700: #1f4e8c;
+    --color-primary-800: #1a3f70;
+    --color-primary-900: #163155;
+    --color-primary-950: #111f32;
 
-    /* Gold color (amber) */
-    --color-gold-50: #fdf9ed;
-    --color-gold-100: #faf0cd;
-    --color-gold-200: #f4de9c;
-    --color-gold-300: #edc662;
-    --color-gold-400: #e6ab37;
-    --color-gold-500: #d8901f;
-    --color-gold-600: #bb6f17;
-    --color-gold-700: #985017;
-    --color-gold-800: #7c4019;
-    --color-gold-900: #68351a;
+    /* Gold color (amber) — complementary accent to the primary blue */
+    --color-gold-50: #fdf8f2;
+    --color-gold-100: #faf0e0;
+    --color-gold-200: #f5dcb8;
+    --color-gold-300: #efc17b;
+    --color-gold-400: #eaa53e;
+    --color-gold-500: #da8c16;
+    --color-gold-600: #b37314;
+    --color-gold-700: #905e14;
+    --color-gold-800: #754e15;
+    --color-gold-900: #5b3f15;
 }
