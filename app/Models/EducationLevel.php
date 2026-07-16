@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class EducationLevel extends Model
 {
     protected $table = 'education_levels';
-    protected $fillable = ['name', 'slug', 'image', 'tagline', 'program', 'order'];
+    protected $fillable = ['name', 'slug', 'image', 'tagline', 'program', 'order', 'whatsapp_number'];
 
     public function facilities(): HasMany
     {
@@ -43,7 +43,7 @@ class EducationLevel extends Model
     // WhatsApp message accessor
     public function getWhatsappUrlAttribute(): string
     {
-        $waNumber = config('school.whatsapp_number');
+        $waNumber = $this->whatsapp_number ?: config('school.whatsapp_number');
         $message = "Assalamu'alaikum, saya ingin mendaftarkan anak saya di jenjang {$this->name} Darul Fikri.";
         return "https://wa.me/{$waNumber}?text=" . urlencode($message);
     }
