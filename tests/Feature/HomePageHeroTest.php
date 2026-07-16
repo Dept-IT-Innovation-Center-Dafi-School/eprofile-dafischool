@@ -93,4 +93,15 @@ class HomePageHeroTest extends TestCase
         $response->assertOk();
         $response->assertDontSee('animate-kenburns', false);
     }
+
+    public function test_slide_photo_is_full_bleed_on_all_breakpoints(): void
+    {
+        HeroSlide::create(['alt' => 'Gedung Sekolah', 'image' => 'https://example.test/gedung.jpg', 'order' => 0]);
+
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertDontSee('lg:object-contain', false);
+        $response->assertDontSee('blur-2xl', false);
+    }
 }
