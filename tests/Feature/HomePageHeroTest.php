@@ -74,4 +74,14 @@ class HomePageHeroTest extends TestCase
         $response->assertSee('hero-counter-current', false);
         $response->assertSee('class="hero-counter-total">03', false);
     }
+
+    public function test_slide_photo_has_ken_burns_animation_class(): void
+    {
+        HeroSlide::create(['alt' => 'Gedung Sekolah', 'image' => 'https://example.test/gedung.jpg', 'order' => 0]);
+
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertSee('animate-kenburns', false);
+    }
 }

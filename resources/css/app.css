@@ -65,6 +65,26 @@
             animation: none;
         }
     }
+
+    /* Ken Burns: slow continuous zoom on hero slide photos */
+    @keyframes hero-kenburns {
+        from {
+            transform: scale(1);
+        }
+        to {
+            transform: scale(1.08);
+        }
+    }
+
+    .animate-kenburns {
+        animation: hero-kenburns 8s ease-in-out infinite alternate;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .animate-kenburns {
+            animation: none;
+        }
+    }
 }
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
