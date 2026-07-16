@@ -46,7 +46,7 @@ class Manager extends Component
             'email' => $this->email,
         ]);
 
-        session()->flash('success', 'Profil berhasil diperbarui.');
+        $this->dispatch('toast', type: 'success', message: 'Profil berhasil diperbarui.');
     }
 
     public function updatePassword(): void
@@ -67,7 +67,7 @@ class Manager extends Component
         $user->update(['password' => $this->newPassword]);
 
         $this->reset(['currentPassword', 'newPassword', 'newPasswordConfirmation']);
-        session()->flash('success', 'Password berhasil diperbarui.');
+        $this->dispatch('toast', type: 'success', message: 'Password berhasil diperbarui.');
     }
 
     public function render()
