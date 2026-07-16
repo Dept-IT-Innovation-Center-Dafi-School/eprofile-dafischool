@@ -18,17 +18,19 @@
 }
 
 @layer components {
-    /* Swiper: dot & arrow styling */
-    .swiper-pagination-bullet {
-        background: #ffffff;
-        opacity: 0.6;
-        width: 10px;
-        height: 10px;
+    /* Swiper: dot & arrow styling.
+       Swiper's own CSS reads these custom properties, so setting them here
+       (instead of overriding `background` directly) wins regardless of
+       stylesheet load order between app.css and swiper/css/pagination. */
+    .hero-swiper {
+        --swiper-pagination-bullet-inactive-color: #ffffff;
+        --swiper-pagination-bullet-inactive-opacity: 0.6;
+        --swiper-pagination-color: #d8901f;
     }
 
-    .swiper-pagination-bullet-active {
-        background: #d8901f;
-        opacity: 1;
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
     }
 
     /* Soft shadow with gold glow for floating CTA */
