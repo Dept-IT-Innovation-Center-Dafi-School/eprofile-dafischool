@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Concerns;
 
+use App\Services\AcademicYearContext;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
@@ -63,6 +64,11 @@ trait ManagesNamedChildRecords
     {
         $this->validate();
 
+        if ($this->editingId === 'new' && ! $this->currentAcademicYearId()) {
+            $this->addError('name', 'Pilih atau buat tahun ajaran terlebih dahulu.');
+            return;
+        }
+
         $imageUrl = $this->existingImage;
 
         if ($this->image) {
@@ -73,6 +79,7 @@ trait ManagesNamedChildRecords
         if ($this->editingId === 'new') {
             $this->modelClass()::create([
                 'education_level_id' => $this->educationLevelId,
+                'academic_year_id' => $this->currentAcademicYearId(),
                 'name' => $this->name,
                 'order' => $this->order,
                 'image' => $imageUrl,
@@ -108,6 +115,12 @@ trait ManagesNamedChildRecords
 
     protected function query(): Builder
     {
-        return $this->modelClass()::where('education_level_id', $this->educationLevelId);
+        return $this->modelClass()::where('education_level_id', $this->educationLevelId)
+            ->where('academic_year_id', $this->currentAcademicYearId());
+    }
+
+    protected function currentAcademicYearId(): ?int
+    {
+        return app(AcademicYearContext::class)->current()?->id;
     }
 }
