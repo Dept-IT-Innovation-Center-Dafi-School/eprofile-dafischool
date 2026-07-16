@@ -99,5 +99,21 @@
             </div>
         </div>
     </div>
+
+    <x-admin.toast-stack />
+    <x-admin.confirm-dialog />
+
+    @if (session('success') || session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                @if (session('success'))
+                    Alpine.store('toast').push('success', @js(session('success')));
+                @endif
+                @if (session('error'))
+                    Alpine.store('toast').push('error', @js(session('error')));
+                @endif
+            });
+        </script>
+    @endif
 </body>
 </html>

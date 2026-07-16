@@ -7,6 +7,50 @@ Swiper.use([Pagination, Autoplay]);
 
 window.Swiper = Swiper;
 
+// Admin toast notifications — a global Alpine store fed either by a Livewire
+// `$this->dispatch('toast', ...)` browser event, or (for actions that redirect,
+// where no live component remains to dispatch from) an inline bootstrap script
+// reading the flashed session message on page load. Registered on 'alpine:init'
+// since Alpine itself is injected by Livewire, not bundled here.
+let toastId = 0;
+
+document.addEventListener('alpine:init', () => {
+    Alpine.store('toast', {
+        items: [],
+        push(type, message) {
+            const id = ++toastId;
+            this.items.push({ id, type, message });
+            setTimeout(() => this.dismiss(id), 5000);
+        },
+        dismiss(id) {
+            this.items = this.items.filter((item) => item.id !== id);
+        },
+    });
+
+    Alpine.store('confirm', {
+        open: false,
+        message: '',
+        confirmLabel: 'Hapus',
+        variant: 'danger',
+        onConfirm: null,
+        show({ message, confirmLabel = 'Hapus', variant = 'danger', onConfirm }) {
+            this.message = message;
+            this.confirmLabel = confirmLabel;
+            this.variant = variant;
+            this.onConfirm = onConfirm;
+            this.open = true;
+        },
+        confirm() {
+            if (this.onConfirm) this.onConfirm();
+            this.close();
+        },
+        close() {
+            this.open = false;
+            this.onConfirm = null;
+        },
+    });
+});
+
 // Initialize hero swiper if element exists
 document.addEventListener('DOMContentLoaded', () => {
     const swiperEl = document.querySelector('.hero-swiper');

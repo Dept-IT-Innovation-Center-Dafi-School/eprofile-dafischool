@@ -1,10 +1,4 @@
 <div class="space-y-6">
-    @if (session('success'))
-        <div role="status" class="p-4 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
-            ✓ {{ session('success') }}
-        </div>
-    @endif
-
     <div class="flex flex-wrap gap-3 justify-between items-center">
         <p class="text-sm text-slate-500">{{ $levels->count() }} jenjang terdaftar</p>
         <a href="{{ route('admin.education-levels.create') }}"
@@ -59,8 +53,8 @@
                            aria-label="Edit {{ $level->name }}">
                             <x-admin.icon name="pencil" class="w-4 h-4" />
                         </a>
-                        <button wire:click="deleteLevel({{ $level->id }})"
-                                wire:confirm="Hapus '{{ $level->name }}'? Tindakan tidak bisa dibatalkan."
+                        <button type="button"
+                                x-on:click="$store.confirm.show({ message: 'Hapus \'{{ $level->name }}\'? Tindakan tidak bisa dibatalkan.', onConfirm: () => $wire.deleteLevel({{ $level->id }}) })"
                                 class="p-2 rounded-md text-slate-500 hover:text-red-600 hover:bg-red-50 transition"
                                 aria-label="Hapus {{ $level->name }}">
                             <x-admin.icon name="trash" class="w-4 h-4" />
