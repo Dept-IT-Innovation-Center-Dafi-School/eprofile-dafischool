@@ -1,6 +1,23 @@
 <x-layout :title="'Darul Fikri - Sekolah Islam Terpadu'" :useSwiper="true" :showBackToTop="false">
     <main class="relative">
-        <h1 class="sr-only">Darul Fikri - Sekolah Islam Terpadu</h1>
+        <div class="fixed top-4 left-4 sm:top-6 sm:left-6 z-40 inline-flex items-center gap-2.5 rounded-full bg-black/35 backdrop-blur-sm border border-white/30 pl-2.5 pr-4 py-2 shadow-md animate-hero-fade-in">
+            @if ($setting->logo)
+                <img id="hero-logo" src="{{ $setting->logo }}" alt="Logo Darul Fikri"
+                     class="w-8 h-8 rounded-full object-cover bg-white/10">
+            @endif
+            <span class="text-white font-display font-bold text-sm sm:text-base">Darul Fikri</span>
+        </div>
+
+        <div class="absolute inset-0 z-20 flex items-center justify-center px-4 pointer-events-none">
+            <div class="text-center animate-hero-fade-in">
+                <h1 class="font-display text-3xl sm:text-5xl font-extrabold text-white drop-shadow-lg">
+                    Darul Fikri
+                </h1>
+                <p class="mt-2 text-sm sm:text-lg text-white/90 max-w-xl mx-auto drop-shadow">
+                    Sekolah Islam Terpadu — Pendidikan berkualitas dari RTK hingga SMA
+                </p>
+            </div>
+        </div>
 
         <div class="swiper hero-swiper h-screen w-full">
             <div class="swiper-wrapper">

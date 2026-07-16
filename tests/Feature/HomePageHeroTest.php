@@ -29,4 +29,35 @@ class HomePageHeroTest extends TestCase
         $response->assertOk();
         $response->assertDontSee('wa.me', false);
     }
+
+    public function test_shows_school_logo_overlay_when_configured(): void
+    {
+        SchoolSetting::current()->update(['logo' => 'https://example.test/storage/uploads/school-settings/logo.png']);
+
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertSee('id="hero-logo"', false);
+        $response->assertSee('https://example.test/storage/uploads/school-settings/logo.png', false);
+    }
+
+    public function test_falls_back_to_text_when_logo_is_not_configured(): void
+    {
+        SchoolSetting::current()->update(['logo' => null]);
+
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertDontSee('id="hero-logo"', false);
+        $response->assertSee('Darul Fikri', false);
+    }
+
+    public function test_shows_visible_headline_and_tagline(): void
+    {
+        $response = $this->get(route('home'));
+
+        $response->assertOk();
+        $response->assertDontSee('sr-only', false);
+        $response->assertSee('Pendidikan berkualitas dari RTK hingga SMA', false);
+    }
 }
