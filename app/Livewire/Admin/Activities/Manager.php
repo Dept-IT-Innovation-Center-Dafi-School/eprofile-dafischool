@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Activities;
 use App\Livewire\Concerns\HandlesImageUpload;
 use App\Livewire\Concerns\HandlesReordering;
 use App\Models\Activity;
+use App\Services\AcademicYearContext;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
@@ -59,6 +60,11 @@ class Manager extends Component
     {
         $this->validate();
 
+        if ($this->editingId === 'new' && ! $this->currentAcademicYearId()) {
+            $this->addError('activity', 'Pilih atau buat tahun ajaran terlebih dahulu.');
+            return;
+        }
+
         $imageUrl = $this->existingImage;
 
         if ($this->image) {
@@ -69,6 +75,7 @@ class Manager extends Component
         if ($this->editingId === 'new') {
             Activity::create([
                 'education_level_id' => $this->educationLevelId,
+                'academic_year_id' => $this->currentAcademicYearId(),
                 'activity' => $this->activity,
                 'order' => $this->order,
                 'image' => $imageUrl,
@@ -104,7 +111,13 @@ class Manager extends Component
 
     protected function query(): Builder
     {
-        return Activity::where('education_level_id', $this->educationLevelId);
+        return Activity::where('education_level_id', $this->educationLevelId)
+            ->where('academic_year_id', $this->currentAcademicYearId());
+    }
+
+    protected function currentAcademicYearId(): ?int
+    {
+        return app(AcademicYearContext::class)->current()?->id;
     }
 
     public function render()

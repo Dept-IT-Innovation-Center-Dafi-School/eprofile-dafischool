@@ -1,7 +1,7 @@
 <div class="space-y-3">
     <div class="flex justify-between items-center">
         <h3 class="text-base font-semibold text-slate-900">Fasilitas Sekolah</h3>
-        @if (!$editingId)
+        @if (!$editingId && app(App\Services\AcademicYearContext::class)->current())
             <button wire:click="startCreate"
                     class="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 bg-primary-50 text-primary-700 hover:bg-primary-100 rounded-lg font-medium transition">
                 <x-admin.icon name="plus" class="w-4 h-4" />
@@ -9,6 +9,8 @@
             </button>
         @endif
     </div>
+
+    @include('livewire.admin.partials.academic-year-guard')
 
     <div class="bg-white rounded-xl border border-slate-200 divide-y divide-slate-100">
         @if ($editingId === 'new')

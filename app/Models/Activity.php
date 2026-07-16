@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Activity extends Model
 {
     protected $table = 'activities';
-    protected $fillable = ['education_level_id', 'activity', 'image', 'order'];
+    protected $fillable = ['education_level_id', 'academic_year_id', 'activity', 'image', 'order'];
 
     public function educationLevel(): BelongsTo
     {

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Extracurricular extends Model
 {
     protected $table = 'extracurriculars';
-    protected $fillable = ['education_level_id', 'name', 'image', 'order'];
+    protected $fillable = ['education_level_id', 'academic_year_id', 'name', 'image', 'order'];
 
     public function educationLevel(): BelongsTo
     {

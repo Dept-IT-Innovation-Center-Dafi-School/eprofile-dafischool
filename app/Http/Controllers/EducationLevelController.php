@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicYear;
 use App\Models\EducationLevel;
 
 class EducationLevelController extends Controller
@@ -15,7 +16,15 @@ class EducationLevelController extends Controller
     public function show(EducationLevel $educationLevel)
     {
         $levels = EducationLevel::orderBy('order')->get(['id', 'name', 'slug']);
-        $educationLevel->load('facilities', 'classStats', 'extracurriculars', 'activities');
+        $activeYearId = AcademicYear::active()->value('id');
+
+        $educationLevel->load([
+            'facilities' => fn ($query) => $query->where('academic_year_id', $activeYearId),
+            'classStats' => fn ($query) => $query->where('academic_year_id', $activeYearId),
+            'extracurriculars' => fn ($query) => $query->where('academic_year_id', $activeYearId),
+            'activities' => fn ($query) => $query->where('academic_year_id', $activeYearId),
+        ]);
+
         return view('levels.show', [
             'level' => $educationLevel,
             'allLevels' => $levels,
