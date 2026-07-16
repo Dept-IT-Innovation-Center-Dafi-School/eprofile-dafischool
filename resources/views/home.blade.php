@@ -5,13 +5,18 @@
         <div class="swiper hero-swiper h-screen w-full">
             <div class="swiper-wrapper">
                 @foreach ($slides as $slide)
-                    <div class="swiper-slide">
+                    <div class="swiper-slide relative bg-slate-900">
                         @if ($slide->image)
-                            @if ($loop->first)
-                                <img src="{{ $slide->image }}" alt="{{ $slide->alt }}" fetchpriority="high" class="w-full h-full object-cover">
-                            @else
-                                <img src="{{ $slide->image }}" alt="{{ $slide->alt }}" loading="lazy" class="w-full h-full object-cover">
-                            @endif
+                            {{-- Blurred backdrop: only shown at lg+, fills the space the
+                                 contained foreground image leaves empty on wide screens
+                                 so a single upload never needs a hard crop that could cut
+                                 off the subject. --}}
+                            <img src="{{ $slide->image }}" alt="" aria-hidden="true"
+                                 loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                                 class="hidden lg:block absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-50">
+                            <img src="{{ $slide->image }}" alt="{{ $slide->alt }}"
+                                 @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif
+                                 class="relative w-full h-full object-cover lg:object-contain">
                         @else
                             <x-image-placeholder :label="$slide->alt" class="w-full h-full" />
                         @endif
