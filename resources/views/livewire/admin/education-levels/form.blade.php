@@ -11,7 +11,7 @@
             <nav aria-label="Bagian jenjang" role="tablist" class="flex flex-wrap gap-1 -mb-px">
                 @foreach ([
                     'info' => 'Info Dasar',
-                    'facilities' => 'Fasilitas Sekolah',
+                    'facilities' => 'Fasilitas Jenjang',
                     'class-stats' => 'Fasilitas Kelas',
                     'extracurriculars' => 'Ekstrakurikuler',
                     'activities' => 'Aktivitas Belajar',
