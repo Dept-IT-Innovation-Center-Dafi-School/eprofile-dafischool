@@ -2,7 +2,7 @@
 
 ## Phase 1: Foundation & quick win
 - [x] Task 1: Floating WhatsApp button di beranda
-- [ ] Task 2: Migration + model — kolom `logo` di `school_settings`
+- [x] Task 2: Migration + model — kolom `logo` di `school_settings`
 
 ### Checkpoint: Foundation
 - [ ] `composer run test` hijau
@@ -10,7 +10,7 @@
 - [ ] Kolom `logo` ada di DB, model bisa fillable
 
 ## Phase 2: Core feature — logo end-to-end
-- [ ] Task 3: Admin bisa upload/ganti/hapus logo di `/admin/settings`
+- [x] Task 3: Admin bisa upload/ganti/hapus logo di `/admin/settings`
 - [ ] Task 4: Homepage — logo overlay + headline/tagline visible
 
 ### Checkpoint: Core Feature

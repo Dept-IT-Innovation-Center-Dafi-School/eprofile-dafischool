@@ -29,7 +29,7 @@ eksplisit di luar scope — halaman tetap pola "cover/splash", bukan halaman scr
 
 ### Phase 1: Foundation & quick win
 - [x] Task 1: Floating WhatsApp button di beranda
-- [ ] Task 2: Migration + model — kolom `logo` di `school_settings`
+- [x] Task 2: Migration + model — kolom `logo` di `school_settings`
 
 ### Checkpoint: Foundation
 - [ ] `composer run test` hijau
@@ -37,7 +37,7 @@ eksplisit di luar scope — halaman tetap pola "cover/splash", bukan halaman scr
 - [ ] Kolom `logo` ada di DB, model bisa fillable
 
 ### Phase 2: Core feature — logo end-to-end
-- [ ] Task 3: Admin bisa upload/ganti/hapus logo di `/admin/settings`
+- [x] Task 3: Admin bisa upload/ganti/hapus logo di `/admin/settings`
 - [ ] Task 4: Homepage — logo overlay + headline/tagline visible
 
 ### Checkpoint: Core Feature
@@ -92,13 +92,13 @@ sama seperti yang sudah dipakai di `footer.blade.php:81`.
 `SchoolSetting` model. Foundation murni, tidak ada UI yang berubah di task ini.
 
 **Acceptance criteria:**
-- [ ] Migration baru menambah kolom `logo` (`nullable string`) ke `school_settings`
-- [ ] `SchoolSetting::$fillable` mencakup `logo`
-- [ ] `SchoolSetting::current()->logo` bisa diisi & dibaca tanpa error
+- [x] Migration baru menambah kolom `logo` (`nullable string`) ke `school_settings`
+- [x] `SchoolSetting::$fillable` mencakup `logo`
+- [x] `SchoolSetting::current()->logo` bisa diisi & dibaca tanpa error
 
 **Verification:**
-- [ ] `php artisan migrate` sukses
-- [ ] `composer run test` — semua test lama tetap hijau, tidak ada breaking change
+- [x] `php artisan migrate` sukses
+- [x] `composer run test` — semua test lama tetap hijau, tidak ada breaking change
 
 **Dependencies:** None
 
@@ -119,18 +119,22 @@ sama seperti yang sudah dipakai di `footer.blade.php:81`.
 settings pakai partial `image-upload-field.blade.php` yang sudah ada.
 
 **Acceptance criteria:**
-- [ ] Admin bisa upload logo baru, preview muncul sebelum submit
-- [ ] Admin bisa hapus logo — kolom `logo` jadi `null`, file lama ke-delete dari storage
-- [ ] Validasi: `nullable|image|mimes:jpg,jpeg,png,webp|max:2048`
-- [ ] Card baru di settings form konsisten dengan style card lain (`bg-white rounded-xl border ...`)
+- [x] Admin bisa upload logo baru, preview muncul sebelum submit
+- [x] Admin bisa hapus logo — kolom `logo` jadi `null`, file lama ke-delete dari storage
+- [x] Validasi: `nullable|image|mimes:jpg,jpeg,png,webp|max:2048`
+- [x] Card baru di settings form konsisten dengan style card lain (`bg-white rounded-xl border ...`)
 
 **Verification:**
-- [ ] Test baru di `tests/Feature/SchoolSettingsPageTest.php`: `Storage::fake('public')` +
-      `Livewire::actingAs($user)->test(Manager::class)->set('logo', UploadedFile::fake()->image('logo.png'))->call('save')->assertHasNoErrors()`,
-      assert `SchoolSetting::current()->logo` terisi & file ada di storage fake
-- [ ] Test hapus logo: assert kolom jadi null & file lama ke-delete
-- [ ] `composer run test` hijau
-- [ ] Manual: login admin, upload logo, cek preview & tombol hapus jalan
+- [x] Test baru di `tests/Feature/SchoolSettingsPageTest.php` (5 test baru: upload, replace, remove,
+      validasi non-image, plus existing coverage) — pakai `Storage::fake('public')` +
+      `UploadedFile::fake()->create(...)` (bukan `->image()`, karena GD extension tidak terpasang
+      di environment ini, mengikuti pola test upload lain di repo)
+- [x] `composer run test` hijau (64/64), `npm run build` sukses
+- [ ] Manual: login admin, upload logo, cek preview & tombol hapus jalan (belum dicek visual)
+
+**Catatan implementasi:** trait `HandlesImageUpload` hardcode nama property `$image`/`$existingImage`
+(bukan diparameterisasi), jadi property Livewire di Settings Manager dinamai `$image`/`$existingImage`
+(bukan `$logo`/`$existingLogo` seperti draft awal), lalu di-map ke kolom `logo` saat `save()`.
 
 **Dependencies:** Task 2
 
