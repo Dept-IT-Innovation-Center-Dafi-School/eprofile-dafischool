@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Auth;
 
+use App\Models\SchoolSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -20,8 +21,12 @@ class Login extends Component
 
     public bool $remember = false;
 
+    public SchoolSetting $setting;
+
     public function mount()
     {
+        $this->setting = SchoolSetting::current();
+
         if (Auth::check()) {
             return redirect()->route('admin.dashboard');
         }

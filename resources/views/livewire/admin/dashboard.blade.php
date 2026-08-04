@@ -1,7 +1,7 @@
 <div class="space-y-6">
     <div>
         <h2 class="text-2xl font-bold text-slate-900">Selamat datang, {{ auth()->user()->name }} 👋</h2>
-        <p class="text-slate-500 mt-1">Ringkasan konten situs Darul Fikri saat ini.</p>
+        <p class="text-slate-500 mt-1">Ringkasan konten situs {{ \App\Models\SchoolSetting::current()->school_name ?? 'Darul Fikri' }} saat ini.</p>
     </div>
 
     <!-- Stat cards -->

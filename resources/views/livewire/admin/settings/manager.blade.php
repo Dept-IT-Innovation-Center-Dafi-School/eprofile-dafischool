@@ -1,6 +1,21 @@
 <div class="max-w-xl space-y-6">
     <form wire:submit="save" class="space-y-6">
         <div class="bg-white rounded-xl border border-slate-200 p-6">
+            <h2 class="text-base font-semibold text-slate-900 mb-4">Identitas Sekolah</h2>
+
+            <div class="space-y-4">
+                <div>
+                    <label for="schoolName" class="block text-sm font-medium text-slate-700 mb-1.5">Nama Sekolah</label>
+                    <input type="text" id="schoolName" wire:model="schoolName"
+                           class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 @error('schoolName') border-red-500 @enderror">
+                    @error('schoolName')
+                        <p role="alert" class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl border border-slate-200 p-6">
             <h2 class="text-base font-semibold text-slate-900 mb-4">Logo Sekolah</h2>
 
             @include('livewire.admin.partials.image-upload-field', [

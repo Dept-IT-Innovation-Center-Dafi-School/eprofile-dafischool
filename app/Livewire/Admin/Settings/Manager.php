@@ -22,6 +22,8 @@ class Manager extends Component
     #[Locked]
     public ?string $existingImage = null;
 
+    public string $schoolName = '';
+
     public string $phone = '';
 
     public string $address = '';
@@ -43,6 +45,7 @@ class Manager extends Component
         $setting = SchoolSetting::current();
 
         $this->existingImage = $setting->logo;
+        $this->schoolName = (string) $setting->school_name;
         $this->phone = (string) $setting->phone;
         $this->address = (string) $setting->address;
         $this->email = (string) $setting->email;
@@ -63,6 +66,7 @@ class Manager extends Component
         }
 
         $validated = $this->validate([
+            'schoolName' => 'required|string|max:255',
             'phone' => 'nullable|string|max:50',
             'address' => 'nullable|string|max:500',
             'email' => 'nullable|email|max:255',
@@ -77,6 +81,7 @@ class Manager extends Component
         $logoUrl = $this->resolveImageUrl('uploads/school-settings');
 
         SchoolSetting::current()->update([
+            'school_name' => $validated['schoolName'],
             'logo' => $logoUrl,
             'phone' => $validated['phone'],
             'address' => $validated['address'],

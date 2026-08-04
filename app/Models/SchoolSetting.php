@@ -9,6 +9,7 @@ class SchoolSetting extends Model
     private const CURRENT_BINDING = 'school-setting.current';
 
     protected $fillable = [
+        'school_name',
         'logo',
         'phone',
         'address',

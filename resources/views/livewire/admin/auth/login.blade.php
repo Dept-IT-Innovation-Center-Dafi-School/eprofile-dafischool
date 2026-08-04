@@ -3,7 +3,7 @@
         <div class="bg-white rounded-2xl shadow-xl p-8 space-y-6">
             <div class="text-center">
                 <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gold-500 text-primary-950 font-display font-bold text-lg mb-4">DF</span>
-                <h1 class="text-2xl font-bold text-slate-900">Darul Fikri</h1>
+                <h1 class="text-2xl font-bold text-slate-900">{{ $setting->school_name ?? 'Darul Fikri' }}</h1>
                 <p class="text-slate-500 mt-1 text-sm">Masuk ke Admin Panel</p>
             </div>
 

@@ -1,4 +1,4 @@
-<x-layout title="Pilihan Jenjang - Darul Fikri" description="Pilih jenjang pendidikan di Sekolah Islam Darul Fikri: RTK, TK, SD, SMP, dan SMA." :showFooter="true">
+<x-layout :title="'Pilihan Jenjang - ' . ($setting->school_name ?? 'Darul Fikri')" :description="'Pilih jenjang pendidikan di Sekolah Islam ' . ($setting->school_name ?? 'Darul Fikri') . ': RTK, TK, SD, SMP, dan SMA.'" :showFooter="true">
     <main>
         <div class="relative bg-primary-900">
             <a href="{{ route('home') }}"

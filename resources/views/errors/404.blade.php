@@ -1,9 +1,10 @@
 @php
     $previousUrl = url()->previous();
     $backUrl = $previousUrl !== url()->current() ? $previousUrl : route('home');
+    $setting = \App\Models\SchoolSetting::current();
 @endphp
 
-<x-layout title="Halaman Tidak Ditemukan - Darul Fikri" description="Halaman yang Anda cari tidak ditemukan.">
+<x-layout :title="'Halaman Tidak Ditemukan - ' . ($setting->school_name ?? 'Darul Fikri')" description="Halaman yang Anda cari tidak ditemukan.">
     <main class="max-w-xl mx-auto px-4 py-24 text-center">
         <div class="w-20 h-20 rounded-full bg-primary-50 flex items-center justify-center mx-auto mb-5 text-4xl">🔍</div>
         <h1 class="font-display text-2xl font-bold text-primary-800 mb-2">Halaman Tidak Ditemukan</h1>

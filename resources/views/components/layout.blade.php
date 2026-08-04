@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Darul Fikri' }}</title>
-    <meta name="description" content="{{ $description ?? 'Sekolah Islam Darul Fikri - Pendidikan berkualitas dari RTK hingga SMA.' }}">
+    <title>{{ $title ?? (\App\Models\SchoolSetting::current()->school_name ?? 'Darul Fikri') }}</title>
+    <meta name="description" content="{{ $description ?? 'Sekolah Islam ' . (\App\Models\SchoolSetting::current()->school_name ?? 'Darul Fikri') . ' - Pendidikan berkualitas dari RTK hingga SMA.' }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -15,7 +15,7 @@
 <footer class="bg-primary-950 text-primary-100">
     <div class="max-w-6xl mx-auto px-4 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div class="lg:col-span-1">
-            <span class="font-display text-white text-xl font-extrabold">Darul Fikri</span>
+            <span class="font-display text-white text-xl font-extrabold">{{ $setting->school_name }}</span>
             <p class="mt-3 text-sm text-primary-200 leading-relaxed">
                 Sekolah Islam Terpadu yang menyatukan akademik dan nilai-nilai Islami,
                 dari jenjang RTK/KB hingga SMA.
@@ -24,7 +24,7 @@
                 <div class="flex items-center gap-3 mt-5">
                     @if ($social->get('instagram'))
                         <a href="{{ $social->get('instagram') }}" target="_blank" rel="noopener noreferrer"
-                           aria-label="Instagram Darul Fikri"
+                           aria-label="Instagram {{ $setting->school_name }}"
                            class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-gold-500 hover:text-primary-950 transition">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -35,7 +35,7 @@
                     @endif
                     @if ($social->get('facebook'))
                         <a href="{{ $social->get('facebook') }}" target="_blank" rel="noopener noreferrer"
-                           aria-label="Facebook Darul Fikri"
+                           aria-label="Facebook {{ $setting->school_name }}"
                            class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-gold-500 hover:text-primary-950 transition">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 9h3V6h-3a3 3 0 00-3 3v3H9v3h2v6h3v-6h3l1-3h-4v-2a1 1 0 011-1z" />
@@ -44,7 +44,7 @@
                     @endif
                     @if ($social->get('youtube'))
                         <a href="{{ $social->get('youtube') }}" target="_blank" rel="noopener noreferrer"
-                           aria-label="YouTube Darul Fikri"
+                           aria-label="YouTube {{ $setting->school_name }}"
                            class="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-gold-500 hover:text-primary-950 transition">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <rect x="2.5" y="5.5" width="19" height="13" rx="3.5" />
@@ -99,14 +99,14 @@
                     allowfullscreen
                     loading="lazy"
                     referrerpolicy="strict-origin-when-cross-origin"
-                    title="Lokasi Darul Fikri di Google Maps"></iframe>
+                    title="Lokasi {{ $setting->school_name }} di Google Maps"></iframe>
             </div>
         </div>
     </div>
 
     <div class="border-t border-white/10">
         <div class="max-w-6xl mx-auto px-4 py-5 text-xs text-primary-300 text-center">
-            &copy; {{ now()->year }} Darul Fikri. Seluruh hak cipta dilindungi.
+            &copy; {{ now()->year }} {{ $setting->school_name }}. Seluruh hak cipta dilindungi.
         </div>
     </div>
 </footer>
