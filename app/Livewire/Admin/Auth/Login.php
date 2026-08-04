@@ -20,6 +20,13 @@ class Login extends Component
 
     public bool $remember = false;
 
+    public function mount()
+    {
+        if (Auth::check()) {
+            redirect()->route('admin.dashboard');
+        }
+    }
+
     public function login()
     {
         $this->validate();
