@@ -1,0 +1,103 @@
+@import 'tailwindcss';
+
+/* Custom styles outside Tailwind utilities */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+        outline: 3px solid #da8c16;
+        outline-offset: 2px;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    /* Swiper: dot & arrow styling.
+       Swiper's own CSS reads these custom properties, so setting them here
+       (instead of overriding `background` directly) wins regardless of
+       stylesheet load order between app.css and swiper/css/pagination. */
+    .hero-swiper {
+        --swiper-pagination-bullet-inactive-color: #ffffff;
+        --swiper-pagination-bullet-inactive-opacity: 0.6;
+        --swiper-pagination-color: #da8c16;
+    }
+
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        transition: width 250ms ease, border-radius 250ms ease;
+    }
+
+    .swiper-pagination-bullet-active {
+        width: 26px;
+        border-radius: 9999px;
+    }
+
+    /* Soft shadow with gold glow for floating CTA */
+    .shadow-glow {
+        box-shadow: 0 8px 24px -4px rgba(218, 140, 22, 0.55), 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Hero overlay entrance (logo, headline, tagline) */
+    @keyframes hero-fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-hero-fade-in {
+        animation: hero-fade-in 900ms ease-out both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .animate-hero-fade-in {
+            animation: none;
+        }
+    }
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    /* Fonts */
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+
+    /* Primary color (blue) */
+    --color-primary-50: #f3f7fc;
+    --color-primary-100: #e3ecf8;
+    --color-primary-200: #c2d6f0;
+    --color-primary-300: #95b7e4;
+    --color-primary-400: #5a90d8;
+    --color-primary-500: #2b6bbf;
+    --color-primary-600: #245ba3;
+    --color-primary-700: #1f4e8c;
+    --color-primary-800: #1a3f70;
+    --color-primary-900: #163155;
+    --color-primary-950: #111f32;
+
+    /* Gold color (amber) — complementary accent to the primary blue */
+    --color-gold-50: #fdf8f2;
+    --color-gold-100: #faf0e0;
+    --color-gold-200: #f5dcb8;
+    --color-gold-300: #efc17b;
+    --color-gold-400: #eaa53e;
+    --color-gold-500: #da8c16;
+    --color-gold-600: #b37314;
+    --color-gold-700: #905e14;
+    --color-gold-800: #754e15;
+    --color-gold-900: #5b3f15;
+}
