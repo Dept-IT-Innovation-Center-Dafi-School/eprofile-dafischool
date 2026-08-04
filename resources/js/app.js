@@ -13,6 +13,8 @@ document.addEventListener('alpine:init', () => {
                 import('quill'),
                 import('quill/dist/quill.snow.css'),
             ]);
+
+            const textarea = document.getElementById('program');
             this.editor = new Quill(this.$refs.editor, {
                 theme: 'snow',
                 modules: {
@@ -24,11 +26,14 @@ document.addEventListener('alpine:init', () => {
                     ],
                 },
             });
-            if (this.$wire.program) {
-                this.editor.root.innerHTML = this.$wire.program;
+
+            if (textarea.value) {
+                this.editor.root.innerHTML = textarea.value;
             }
+
             this.editor.on('text-change', () => {
-                this.$wire.program = this.editor.root.innerHTML;
+                textarea.value = this.editor.root.innerHTML;
+                textarea.dispatchEvent(new Event('input', { bubbles: true }));
             });
         },
     }));
