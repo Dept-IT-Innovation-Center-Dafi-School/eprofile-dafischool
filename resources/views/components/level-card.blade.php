@@ -11,10 +11,10 @@
         @endif
         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
     </div>
-    <div class="flex flex-col flex-1 p-4 sm:p-5 border-t-2 border-gold-400">
-        <h3 class="font-display font-bold text-lg text-primary-800">{{ $level->name }}</h3>
-        <p class="text-sm text-slate-500 mt-1">{{ $level->tagline }}</p>
-        <span class="inline-flex items-center gap-1 mt-auto pt-3 text-gold-600 font-semibold text-sm group-hover:gap-2 transition-all">
+    <div class="flex flex-col flex-1 p-4 sm:p-4 border-t-2 border-gold-400">
+        <h3 class="font-display font-bold text-base sm:text-lg text-primary-800 line-clamp-2">{{ $level->name }}</h3>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1 line-clamp-2">{{ $level->tagline }}</p>
+        <span class="inline-flex items-center gap-1 mt-auto pt-2 text-gold-600 font-semibold text-xs sm:text-sm group-hover:gap-2 transition-all">
             Lihat Detail <span aria-hidden="true">&rarr;</span>
         </span>
     </div>
