@@ -2,7 +2,7 @@
 
 <a href="{{ route('levels.show', $level->slug) }}"
    class="group flex flex-col h-full rounded-2xl overflow-hidden bg-white shadow-md ring-1 ring-slate-900/5 hover:shadow-xl hover:-translate-y-1 active:scale-95 transition duration-300 min-h-[44px]">
-    <div class="aspect-video overflow-hidden relative shrink-0">
+    <div class="aspect-[3/2] overflow-hidden relative shrink-0">
         @if ($level->image)
             <img src="{{ $level->image }}" alt="{{ $level->name }}" loading="lazy"
                  class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
