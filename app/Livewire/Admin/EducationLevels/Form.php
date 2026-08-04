@@ -12,6 +12,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Mews\Purifier\Facades\Purifier;
 
 #[Layout('components.admin.layout')]
 class Form extends Component
@@ -80,13 +81,14 @@ class Form extends Component
         ]);
 
         $imageUrl = $this->resolveImageUrl('uploads/education-levels');
+        $sanitizedProgram = Purifier::clean($this->program, 'program_editor');
 
         if ($this->level) {
             $this->level->update([
                 'name' => $this->name,
                 'slug' => $this->slug,
                 'tagline' => $this->tagline,
-                'program' => $this->program,
+                'program' => $sanitizedProgram,
                 'order' => $this->order,
                 'whatsapp_number' => $this->whatsappNumber,
                 'image' => $imageUrl,
@@ -102,7 +104,7 @@ class Form extends Component
             'name' => $this->name,
             'slug' => $this->slug,
             'tagline' => $this->tagline,
-            'program' => $this->program,
+            'program' => $sanitizedProgram,
             'order' => $this->order,
             'whatsapp_number' => $this->whatsappNumber,
             'image' => $imageUrl,

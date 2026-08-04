@@ -49,7 +49,7 @@
         <section id="program" class="max-w-6xl mx-auto px-4 mt-10 scroll-mt-20">
             <x-section-heading eyebrow="Kurikulum & Pendekatan" title="Program" />
             <div class="rounded-xl bg-white shadow-sm ring-1 ring-slate-900/5 p-5 sm:p-6">
-                <p class="text-slate-600 leading-relaxed">{{ $level->program }}</p>
+                <div class="rich-text-content text-slate-600 leading-relaxed">{!! $level->program !!}</div>
             </div>
         </section>
 

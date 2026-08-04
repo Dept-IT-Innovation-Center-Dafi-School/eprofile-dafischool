@@ -57,9 +57,10 @@
             </div>
 
             <div>
-                <label for="program" class="block text-sm font-medium text-slate-700 mb-1">Program</label>
-                <textarea id="program" wire:model="program" rows="4"
-                          class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 @error('program') border-red-500 @enderror"></textarea>
+                <label class="block text-sm font-medium text-slate-700 mb-1">Program</label>
+                <div wire:ignore x-data="richTextEditor()">
+                    <div x-ref="editor"></div>
+                </div>
                 @error('program')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror

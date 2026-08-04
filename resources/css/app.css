@@ -82,6 +82,63 @@
             animation: none;
         }
     }
+
+    /* Rich text editor (Quill) */
+    .ql-toolbar {
+        @apply rounded-t-lg border border-slate-300 bg-slate-50;
+    }
+
+    .ql-container {
+        @apply rounded-b-lg border border-t-0 border-slate-300 font-sans;
+    }
+
+    .ql-container.ql-snow .ql-editor {
+        @apply min-h-[150px] p-4;
+    }
+
+    .ql-toolbar.ql-snow {
+        @apply p-2;
+    }
+
+    /* Rich text content rendering in public views */
+    .rich-text-content p {
+        @apply mb-4;
+    }
+
+    .rich-text-content ul,
+    .rich-text-content ol {
+        @apply mb-4 pl-6;
+    }
+
+    .rich-text-content ul {
+        @apply list-disc;
+    }
+
+    .rich-text-content ol {
+        @apply list-decimal;
+    }
+
+    .rich-text-content li {
+        @apply mb-2;
+    }
+
+    .rich-text-content a {
+        @apply text-primary-600 hover:text-primary-700 underline;
+    }
+
+    .rich-text-content strong,
+    .rich-text-content b {
+        @apply font-semibold;
+    }
+
+    .rich-text-content em,
+    .rich-text-content i {
+        @apply italic;
+    }
+
+    .rich-text-content u {
+        @apply underline;
+    }
 }
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
