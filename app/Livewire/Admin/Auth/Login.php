@@ -23,7 +23,7 @@ class Login extends Component
     public function mount()
     {
         if (Auth::check()) {
-            redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard');
         }
     }
 
