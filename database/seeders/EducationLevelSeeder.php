@@ -178,6 +178,7 @@ class EducationLevelSeeder extends Seeder
                 'tagline' => $levelData['tagline'],
                 'program' => $levelData['program'],
                 'order'   => $levelOrder,
+                'show_extracurriculars' => $levelData['slug'] !== 'rtk',
             ]);
 
             foreach ($levelData['facilities'] as $order => $facility) {

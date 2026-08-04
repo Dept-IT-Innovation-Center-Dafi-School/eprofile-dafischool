@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class EducationLevel extends Model
 {
     protected $table = 'education_levels';
-    protected $fillable = ['name', 'slug', 'image', 'tagline', 'program', 'order', 'whatsapp_number'];
+    protected $fillable = ['name', 'slug', 'image', 'tagline', 'program', 'order', 'whatsapp_number', 'show_extracurriculars'];
 
     public function facilities(): HasMany
     {
