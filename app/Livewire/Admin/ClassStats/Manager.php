@@ -24,6 +24,7 @@ class Manager extends Component
     {
         return view('livewire.admin.class-stats.manager', [
             'classStats' => $this->query()->orderBy('order')->get(),
+            'isBoarding' => \App\Models\EducationLevel::whereKey($this->educationLevelId)->value('slug') === 'boarding',
         ]);
     }
 }
