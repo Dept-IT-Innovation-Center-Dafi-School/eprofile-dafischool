@@ -5,9 +5,9 @@
             <div class="relative rounded-2xl overflow-hidden shadow-lg">
                 @if ($level->image)
                     <img src="{{ $level->image }}" alt="{{ $level->name }}" fetchpriority="high"
-                         class="w-full aspect-video object-cover">
+                         class="w-full h-72 sm:h-[450px] lg:h-[500px] object-cover">
                 @else
-                    <x-image-placeholder :label="$level->name" class="w-full aspect-video" />
+                    <x-image-placeholder :label="$level->name" class="w-full h-72 sm:h-[450px] lg:h-[500px]" />
                 @endif
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end">
                     <div class="p-5 sm:p-8">
