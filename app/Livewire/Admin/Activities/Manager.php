@@ -122,6 +122,7 @@ class Manager extends Component
     {
         return view('livewire.admin.activities.manager', [
             'activities' => $this->query()->orderBy('order')->get(),
+            'isBoarding' => \App\Models\EducationLevel::whereKey($this->educationLevelId)->value('slug') === 'boarding smpit-smait',
         ]);
     }
 }

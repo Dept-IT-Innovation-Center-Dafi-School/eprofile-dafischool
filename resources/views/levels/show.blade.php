@@ -80,8 +80,8 @@
         @endif
 
         <!-- Activities -->
-        <x-level-section eyebrow="Keseharian di Sekolah" title="Aktivitas Belajar" :items="$level->activities"
-                          empty-message="Aktivitas belajar belum ditambahkan.">
+        <x-level-section eyebrow="{{ $isBoarding ? 'Keseharian di Asrama' : 'Keseharian di Sekolah' }}" title="{{ $isBoarding ? 'Aktivitas Boarding' : 'Aktivitas Belajar' }}" :items="$level->activities"
+                          empty-message="{{ $isBoarding ? 'Aktivitas boarding belum ditambahkan.' : 'Aktivitas belajar belum ditambahkan.' }}">
             @foreach ($level->activities as $activity)
                 <x-activity-card :activity="$activity" />
             @endforeach
