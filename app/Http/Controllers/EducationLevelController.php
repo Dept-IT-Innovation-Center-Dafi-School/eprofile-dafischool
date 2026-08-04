@@ -30,7 +30,7 @@ class EducationLevelController extends Controller
             $educationLevel->show_extracurriculars = false;
         }
 
-        $isBoarding = $educationLevel->slug === 'boarding';
+        $isBoarding = $educationLevel->slug === 'smpit-smait';
 
         return view('levels.show', [
             'level' => $educationLevel,
