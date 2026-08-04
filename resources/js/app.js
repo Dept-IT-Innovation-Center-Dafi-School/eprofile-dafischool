@@ -3,16 +3,17 @@
 // where no live component remains to dispatch from) an inline bootstrap script
 // reading the flashed session message on page load. Registered on 'alpine:init'
 // since Alpine itself is injected by Livewire, not bundled here.
+
+// Quill CSS - import at top level so it's always available
+import 'quill/dist/quill.snow.css';
+
 let toastId = 0;
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('richTextEditor', () => ({
         editor: null,
         async init() {
-            const [{ default: Quill }] = await Promise.all([
-                import('quill'),
-                import('quill/dist/quill.snow.css'),
-            ]);
+            const { default: Quill } = await import('quill');
 
             const textarea = document.getElementById('program');
             this.editor = new Quill(this.$refs.editor, {
