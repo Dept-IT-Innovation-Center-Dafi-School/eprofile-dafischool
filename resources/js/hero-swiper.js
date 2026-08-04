@@ -15,12 +15,4 @@ new Swiper('.hero-swiper', {
         clickable: true,
     },
     grabCursor: true,
-    on: {
-        slideChange(swiper) {
-            const counter = document.querySelector('.hero-counter-current');
-            if (counter) {
-                counter.textContent = String(swiper.realIndex + 1).padStart(2, '0');
-            }
-        },
-    },
 });
