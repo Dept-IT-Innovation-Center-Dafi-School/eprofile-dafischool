@@ -7,14 +7,12 @@ let toastId = 0;
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('richTextEditor', () => ({
-        value: null,
         editor: null,
         async init() {
             const [{ default: Quill }] = await Promise.all([
                 import('quill'),
                 import('quill/dist/quill.snow.css'),
             ]);
-            this.value = this.$wire.entangle('program');
             this.editor = new Quill(this.$refs.editor, {
                 theme: 'snow',
                 modules: {
@@ -26,11 +24,11 @@ document.addEventListener('alpine:init', () => {
                     ],
                 },
             });
-            if (this.value.value) {
-                this.editor.root.innerHTML = this.value.value;
+            if (this.$wire.program) {
+                this.editor.root.innerHTML = this.$wire.program;
             }
             this.editor.on('text-change', () => {
-                this.value.value = this.editor.root.innerHTML;
+                this.$wire.program = this.editor.root.innerHTML;
             });
         },
     }));
