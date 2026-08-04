@@ -24,9 +24,7 @@ Route::group(['prefix' => 'levels', 'as' => 'levels.'], function () {
     Route::get('{educationLevel:slug}', [EducationLevelController::class, 'show'])->name('show');
 });
 
-Route::middleware('guest')->group(function () {
-    Route::get('/admin/login', Login::class)->name('admin.login');
-});
+Route::get('/admin/login', Login::class)->name('admin.login');
 
 Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     Route::get('/', Dashboard::class)->name('dashboard');
