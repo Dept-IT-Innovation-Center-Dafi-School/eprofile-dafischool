@@ -25,6 +25,11 @@ class EducationLevelController extends Controller
             'activities' => fn ($query) => $query->where('academic_year_id', $activeYearId),
         ]);
 
+        // Hide extracurriculars section for RTK unit (order=1)
+        if ($educationLevel->order === 1) {
+            $educationLevel->show_extracurriculars = false;
+        }
+
         return view('levels.show', [
             'level' => $educationLevel,
             'allLevels' => $levels,
