@@ -34,7 +34,9 @@
                     <a href="#program" class="shrink-0 px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-primary-700 transition">Program</a>
                     <a href="#fasilitas-sekolah" class="shrink-0 px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-primary-700 transition">Fasilitas</a>
                     <a href="#fasilitas-kelas" class="shrink-0 px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-primary-700 transition">Kelas</a>
-                    <a href="#ekstrakurikuler" class="shrink-0 px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-primary-700 transition">Ekskul</a>
+                    @if ($level->show_extracurriculars)
+                        <a href="#ekstrakurikuler" class="shrink-0 px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-primary-700 transition">Ekskul</a>
+                    @endif
                     <a href="#aktivitas-belajar" class="shrink-0 px-3 py-1.5 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-primary-700 transition">Aktivitas</a>
                 </nav>
                 <div class="shrink-0 overflow-x-auto">
@@ -68,12 +70,14 @@
         </x-level-section>
 
         <!-- Extracurriculars -->
-        <x-level-section eyebrow="Minat & Bakat" title="Ekstrakurikuler" :items="$level->extracurriculars"
-                          empty-message="Ekstrakurikuler belum ditambahkan.">
-            @foreach ($level->extracurriculars as $extracurricular)
-                <x-image-card :item="$extracurricular" />
-            @endforeach
-        </x-level-section>
+        @if ($level->show_extracurriculars)
+            <x-level-section eyebrow="Minat & Bakat" title="Ekstrakurikuler" :items="$level->extracurriculars"
+                              empty-message="Ekstrakurikuler belum ditambahkan.">
+                @foreach ($level->extracurriculars as $extracurricular)
+                    <x-image-card :item="$extracurricular" />
+                @endforeach
+            </x-level-section>
+        @endif
 
         <!-- Activities -->
         <x-level-section eyebrow="Keseharian di Sekolah" title="Aktivitas Belajar" :items="$level->activities"
