@@ -22,6 +22,14 @@
                             <x-image-placeholder :label="$slide->alt" class="w-full h-full" />
                         @endif
                         <div class="absolute inset-0 bg-black/40"></div>
+
+                        @if ($slide->alt)
+                            <div class="hero-caption absolute bottom-0 left-0 z-30 p-4 sm:p-6 max-w-xs">
+                                <p class="text-white text-sm sm:text-base font-medium leading-snug drop-shadow-lg">
+                                    {{ $slide->alt }}
+                                </p>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>

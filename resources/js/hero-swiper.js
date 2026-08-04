@@ -15,4 +15,16 @@ new Swiper('.hero-swiper', {
         clickable: true,
     },
     grabCursor: true,
+    on: {
+        slideChange(swiper) {
+            // Re-trigger caption animation on slide change
+            const caption = swiper.slides[swiper.activeIndex].querySelector('.hero-caption');
+            if (caption) {
+                caption.style.animation = 'none';
+                // Trigger reflow to restart animation
+                void caption.offsetWidth;
+                caption.style.animation = '';
+            }
+        },
+    },
 });
