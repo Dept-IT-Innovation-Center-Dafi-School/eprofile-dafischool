@@ -85,9 +85,9 @@ class Form extends Component
 
         \Log::info('After purifier', ['content' => $sanitizedProgram]);
 
-        // Collapse empty <p></p> groups: remove single Enter (1 empty p), convert 2+ Enters to <br>
+        // Collapse empty <p></p> and <p><br/></p> groups: remove single Enter, convert 2+ Enters to <br>
         $sanitizedProgram = preg_replace_callback(
-            '/<p>\s*<\/p>(<p>\s*<\/p>)*/i',
+            '/<p>\s*(?:<br\s*\/?>\s*)?<\/p>(<p>\s*(?:<br\s*\/?>\s*)?<\/p>)*/i',
             function($matches) {
                 $count = substr_count($matches[0], '<p>');
                 \Log::info('Collapse match', ['matched' => $matches[0], 'count' => $count, 'replacement' => ($count >= 2 ? '<br>' : '')]);
