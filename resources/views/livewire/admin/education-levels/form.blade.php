@@ -59,7 +59,7 @@
             <div>
                 <label class="block text-sm font-medium text-slate-700 mb-1">Program</label>
                 <textarea id="program" wire:model="program" class="hidden"></textarea>
-                <div x-data="richTextEditor()" wire:ignore.self>
+                <div x-data="richTextEditor()" wire:ignore>
                     <div x-ref="editor"></div>
                 </div>
                 @error('program')
