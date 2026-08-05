@@ -1,4 +1,4 @@
-<div class="max-w-3xl space-y-6" @if($level) x-data="{ tab: 'info' }" @endif>
+<div class="max-w-full space-y-6" @if($level) x-data="{ tab: 'info' }" @endif>
     <a href="{{ route('admin.education-levels.index') }}"
        class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-primary-700 transition"
        aria-label="Kembali ke daftar jenjang pendidikan">
@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    <div @if($level) x-show="tab === 'info'" x-cloak role="tabpanel" @endif class="bg-white rounded-lg shadow p-6 space-y-4">
+    <div @if($level) x-show="tab === 'info'" x-cloak role="tabpanel" @endif class="bg-white rounded-lg shadow p-6 space-y-4 max-w-3xl">
         <form wire:submit="save" class="space-y-4">
             <div>
                 <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nama Jenjang</label>
