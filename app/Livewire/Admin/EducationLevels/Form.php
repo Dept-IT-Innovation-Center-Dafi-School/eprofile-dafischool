@@ -83,8 +83,10 @@ class Form extends Component
         $imageUrl = $this->resolveImageUrl('uploads/education-levels');
         $sanitizedProgram = Purifier::clean($this->program, 'program_editor');
 
-        // Remove only <p> tags with <br> (Quill's internal artifact), preserve empty <p></p> from Enter presses
-        $sanitizedProgram = preg_replace('/<p><br\s*\/?><\/p>/i', '', $sanitizedProgram);
+        // Convert empty <p></p> to <br> for proper spacing (Enter 1x = small break, Enter 2x = bigger gap)
+        $sanitizedProgram = preg_replace('/<p>\s*<\/p>/i', '<br>', $sanitizedProgram);
+        // Remove leading/trailing <br> tags
+        $sanitizedProgram = preg_replace('/^<br\s*\/?>\s*|<br\s*\/?>\s*$/i', '', $sanitizedProgram);
 
         if ($this->level) {
             $this->level->update([
