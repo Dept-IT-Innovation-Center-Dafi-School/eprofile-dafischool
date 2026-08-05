@@ -1,21 +1,27 @@
 @props(['testimonial'])
 
-<div class="h-full rounded-2xl bg-white shadow-sm ring-1 ring-slate-900/5 p-6 flex flex-col">
-    <div class="text-gold-400 text-4xl leading-none mb-3" aria-hidden="true">&ldquo;</div>
-    <blockquote class="flex-1 text-slate-700 leading-relaxed">{{ $testimonial->quote }}</blockquote>
-    <footer class="mt-5 pt-5 border-t border-slate-100 flex items-center gap-3">
-        <div class="w-12 h-12 rounded-full overflow-hidden shrink-0 bg-slate-100 ring-2 ring-gold-100">
-            @if ($testimonial->image)
-                <img src="{{ $testimonial->image }}" alt="{{ $testimonial->name }}" loading="lazy"
-                     decoding="async" class="w-full h-full object-cover">
-            @else
-                <x-image-placeholder compact class="w-full h-full" />
-            @endif
-        </div>
-        <div class="min-w-0">
-            <p class="font-semibold text-slate-900 truncate">{{ $testimonial->name }}</p>
-            <p class="text-sm text-slate-500 truncate">{{ $testimonial->campus }}</p>
-            <p class="text-xs font-semibold text-gold-600">Angkatan {{ $testimonial->batch }}</p>
-        </div>
-    </footer>
+<div class="mx-auto max-w-3xl px-2">
+    <div class="relative rounded-3xl bg-white shadow-xl ring-1 ring-slate-900/5 px-6 sm:px-12 py-10 sm:py-12 overflow-hidden">
+        <span class="absolute -top-7 -left-2 font-serif text-[130px] leading-none text-gold-200 select-none pointer-events-none" aria-hidden="true">&ldquo;</span>
+
+        <blockquote class="relative font-serif text-slate-700 text-xl sm:text-2xl leading-relaxed sm:leading-relaxed">
+            {{ $testimonial->quote }}
+        </blockquote>
+
+        <footer class="relative mt-8 pt-7 border-t border-slate-100 flex flex-col sm:flex-row items-center sm:items-center gap-4">
+            <div class="w-16 h-16 rounded-full overflow-hidden shrink-0 bg-slate-100 ring-2 ring-gold-400 ring-offset-2 ring-offset-white">
+                @if ($testimonial->image)
+                    <img src="{{ $testimonial->image }}" alt="{{ $testimonial->name }}" loading="lazy"
+                         decoding="async" class="w-full h-full object-cover">
+                @else
+                    <x-image-placeholder compact class="w-full h-full" />
+                @endif
+            </div>
+            <div class="text-center sm:text-left">
+                <p class="font-semibold text-slate-900">{{ $testimonial->name }}</p>
+                <p class="text-slate-500">{{ $testimonial->campus }}</p>
+                <p class="text-sm font-semibold tracking-wide text-gold-600">Angkatan {{ $testimonial->batch }}</p>
+            </div>
+        </footer>
+    </div>
 </div>

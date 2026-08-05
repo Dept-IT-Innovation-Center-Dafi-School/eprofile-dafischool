@@ -1,28 +1,34 @@
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
-new Swiper('.testimonial-swiper', {
-    modules: [Navigation, Pagination],
+const el = document.querySelector('.testimonial-swiper');
+
+new Swiper(el, {
+    modules: [Autoplay, EffectFade, Pagination],
+    effect: 'fade',
+    fadeEffect: { crossFade: true },
+    loop: true,
     slidesPerView: 1,
-    spaceBetween: 16,
-    grabCursor: true,
-    navigation: {
-        nextEl: '.testimonial-next',
-        prevEl: '.testimonial-prev',
+    autoHeight: true,
+    allowTouchMove: false,
+    autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
     },
     pagination: {
         el: '.testimonial-swiper-pagination',
         clickable: true,
     },
-    breakpoints: {
-        640: {
-            slidesPerView: 2,
-        },
-        1024: {
-            slidesPerView: 3,
+    on: {
+        init(swiper) {
+            // Respect reduced-motion preferences: don't auto-advance the quotes.
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                swiper.autoplay.stop();
+            }
         },
     },
 });

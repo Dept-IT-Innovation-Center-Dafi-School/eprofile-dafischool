@@ -87,27 +87,23 @@
             @endforeach
         </x-level-section>
 
-        <!-- Testimonials (hanya unit SMA) -->
+        <!-- Testimonials (hanya unit SMAIT) -->
         @if ($isSmait && $level->testimonials->isNotEmpty())
-            <section id="testimoni-alumni" class="max-w-6xl mx-auto px-4 mt-12 scroll-mt-20">
-                <x-section-heading eyebrow="Kata Mereka" title="Testimoni Alumni" />
-                <div class="swiper testimonial-swiper">
-                    <div class="swiper-wrapper">
-                        @foreach ($level->testimonials as $testimonial)
-                            <div class="swiper-slide !h-auto pb-6">
-                                <x-testimonial-card :testimonial="$testimonial" />
+            <section id="testimoni-alumni" class="mt-12 scroll-mt-20">
+                <div class="bg-gradient-to-br from-white via-slate-50 to-gold-50/60 border-y border-slate-100 py-14 sm:py-16">
+                    <div class="max-w-6xl mx-auto px-4">
+                        <x-section-heading eyebrow="Kata Mereka" title="Testimoni Alumni" />
+                        <div class="swiper testimonial-swiper">
+                            <div class="swiper-wrapper">
+                                @foreach ($level->testimonials as $testimonial)
+                                    <div class="swiper-slide !h-auto">
+                                        <x-testimonial-card :testimonial="$testimonial" />
+                                    </div>
+                                @endforeach
                             </div>
-                        @endforeach
+                            <div class="testimonial-swiper-pagination swiper-pagination !static mt-8"></div>
+                        </div>
                     </div>
-                    <div class="testimonial-swiper-pagination swiper-pagination !static mt-2"></div>
-                </div>
-                <div class="flex items-center justify-center gap-3 mt-5">
-                    <button type="button" class="testimonial-prev btn-testimonial" aria-label="Testimoni sebelumnya">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-                    </button>
-                    <button type="button" class="testimonial-next btn-testimonial" aria-label="Testimoni berikutnya">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                    </button>
                 </div>
             </section>
         @endif
