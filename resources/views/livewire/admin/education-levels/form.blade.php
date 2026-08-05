@@ -28,7 +28,7 @@
         </div>
     @endif
 
-    <div @if($level) x-show="tab === 'info'" x-cloak role="tabpanel" @endif class="bg-white rounded-lg shadow p-6 space-y-4 max-w-3xl">
+    <div @if($level) x-show="tab === 'info'" x-cloak role="tabpanel" @endif class="bg-white rounded-lg shadow p-6 space-y-4">
         <form wire:submit="save" class="space-y-4">
             <div>
                 <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nama Jenjang</label>
