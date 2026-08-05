@@ -83,6 +83,9 @@ class Form extends Component
         $imageUrl = $this->resolveImageUrl('uploads/education-levels');
         $sanitizedProgram = Purifier::clean($this->program, 'program_editor');
 
+        // Remove empty paragraphs with only <br> tags to prevent double line breaks
+        $sanitizedProgram = preg_replace('/<p>\s*<br\s*\/?>\s*<\/p>/i', '', $sanitizedProgram);
+
         if ($this->level) {
             $this->level->update([
                 'name' => $this->name,
