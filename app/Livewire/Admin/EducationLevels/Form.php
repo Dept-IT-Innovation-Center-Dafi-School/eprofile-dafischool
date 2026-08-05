@@ -65,6 +65,8 @@ class Form extends Component
 
     public function save()
     {
+        $this->slug = trim($this->slug);
+
         $this->validate([
             'name' => 'required|string|max:255',
             'slug' => [
