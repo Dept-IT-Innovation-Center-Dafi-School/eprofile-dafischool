@@ -187,8 +187,3 @@
 .rich-text-content u {
     text-decoration: underline;
 }
-
-.rich-text-content br {
-    display: block;
-    content: '';
-}
