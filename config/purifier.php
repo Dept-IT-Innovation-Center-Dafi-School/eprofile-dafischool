@@ -40,7 +40,7 @@ return [
         'program_editor' => [
             'HTML.Allowed'             => 'p,br,strong,b,em,i,u,ol,ul,li,a[href|rel|target]',
             'HTML.TargetBlank'         => true,
-            'AutoFormat.RemoveEmpty'   => true,
+            'AutoFormat.RemoveEmpty'   => false,
             'AutoFormat.AutoParagraph' => false,
         ],
         'custom_definition' => [
