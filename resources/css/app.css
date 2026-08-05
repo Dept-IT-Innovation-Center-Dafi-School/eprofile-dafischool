@@ -37,12 +37,11 @@
     .swiper-pagination-bullet {
         width: 10px;
         height: 10px;
-        transition: width 250ms ease, border-radius 250ms ease;
+        transition: transform 250ms ease, background-color 250ms ease, opacity 250ms ease;
     }
 
     .swiper-pagination-bullet-active {
-        width: 26px;
-        border-radius: 9999px;
+        transform: scale(1.4);
     }
 
     /* Testimonial carousel: active card enlarges, side cards recede.

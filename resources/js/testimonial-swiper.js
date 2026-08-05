@@ -6,13 +6,13 @@ import 'swiper/css/pagination';
 new Swiper('.testimonial-swiper', {
     modules: [Autoplay, Pagination],
     loop: true,
+    loopedSlides: 3,
     centeredSlides: true,
     slidesPerView: 1,
     spaceBetween: 24,
     breakpoints: {
         640: { slidesPerView: 2 },
         1024: { slidesPerView: 3 },
-        1536: { slidesPerView: 4 },
     },
     autoplay: {
         delay: 6000,
@@ -25,6 +25,8 @@ new Swiper('.testimonial-swiper', {
     },
     on: {
         init(swiper) {
+            swiper.pagination.update();
+
             // Respect reduced-motion preferences: don't auto-advance the cards.
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 swiper.autoplay.stop();

@@ -41,6 +41,18 @@ class TestimonialSeeder extends Seeder
                 'batch' => '2021',
                 'quote' => 'Dari tahfidz hingga pelajaran sains, semuanya berjalan seimbang. Saya bangga menjadi alumni SIT Darul Fikri.',
             ],
+            [
+                'name'  => 'Rizky Pratama',
+                'campus' => 'Universitas Airlangga',
+                'batch' => '2022',
+                'quote' => 'Pembiasaan sholat dan disiplin sejak dini membentuk karakter saya sampai sekarang. Terima kasih Darul Fikri.',
+            ],
+            [
+                'name'  => 'Salsabila Zahra',
+                'campus' => 'UIN Alauddin Makassar',
+                'batch' => '2023',
+                'quote' => 'Suasana kekeluargaan dan bimbingan guru membuat saya betah belajar. Ilmu agama dan umumnya sangat seimbang.',
+            ],
         ];
 
         foreach ($samples as $order => $sample) {

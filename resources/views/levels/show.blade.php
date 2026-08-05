@@ -91,7 +91,7 @@
         @if ($isSmait && $level->testimonials->isNotEmpty())
             <section id="testimoni-alumni" class="mt-12 scroll-mt-20">
                 <div class="bg-gradient-to-br from-white via-slate-50 to-gold-50/60 border-y border-slate-100 py-14 sm:py-16">
-                    <div class="max-w-6xl mx-auto px-4">
+                    <div class="max-w-7xl mx-auto px-4">
                         <x-section-heading eyebrow="Kata Mereka" title="Testimoni Alumni" />
                         <div class="swiper testimonial-swiper">
                             <div class="swiper-wrapper">
