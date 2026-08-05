@@ -100,6 +100,10 @@
         @apply p-2;
     }
 
+    .ql-editor p {
+        @apply mb-4;
+    }
+
     /* Rich text editor (Quill) - styles remain in layer components */
 }
 
