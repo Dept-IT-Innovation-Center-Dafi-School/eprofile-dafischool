@@ -29,7 +29,7 @@ document.addEventListener('alpine:init', () => {
             });
 
             if (textarea.value) {
-                this.editor.root.innerHTML = textarea.value;
+                this.editor.clipboard.dangerouslyPasteHTML(textarea.value);
             }
 
             this.editor.on('text-change', () => {
