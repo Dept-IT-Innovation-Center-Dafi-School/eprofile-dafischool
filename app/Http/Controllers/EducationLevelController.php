@@ -31,11 +31,13 @@ class EducationLevelController extends Controller
         }
 
         $isBoarding = $educationLevel->slug === 'boarding smpit-smait';
+        $isInklusi = $educationLevel->slug === 'inklusi';
 
         return view('levels.show', [
             'level' => $educationLevel,
             'allLevels' => $levels,
             'isBoarding' => $isBoarding,
+            'isInklusi' => $isInklusi,
         ]);
     }
 }

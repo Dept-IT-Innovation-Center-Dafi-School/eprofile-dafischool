@@ -12,7 +12,7 @@
                 @foreach ([
                     'info' => 'Info Dasar',
                     'facilities' => 'Fasilitas Jenjang',
-                    'class-stats' => $level?->slug === 'boarding smpit-smait' ? 'Fasilitas Boarding' : 'Fasilitas Kelas',
+                    'class-stats' => $level?->slug === 'inklusi' ? 'Fasilitas Terapi' : ($level?->slug === 'boarding smpit-smait' ? 'Fasilitas Boarding' : 'Fasilitas Kelas'),
                     'extracurriculars' => 'Ekstrakurikuler',
                     'activities' => $level?->slug === 'boarding smpit-smait' ? 'Aktivitas Boarding' : 'Aktivitas Belajar',
                 ] as $tabKey => $tabLabel)

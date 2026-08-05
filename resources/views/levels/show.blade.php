@@ -62,8 +62,8 @@
         </x-level-section>
 
         <!-- Class Facilities -->
-        <x-level-section eyebrow="{{ $isBoarding ? 'Sarana Boarding' : 'Sarana Belajar' }}" title="{{ $isBoarding ? 'Fasilitas Boarding' : 'Fasilitas Kelas' }}" :items="$level->classStats"
-                          empty-message="{{ $isBoarding ? 'Fasilitas boarding belum ditambahkan.' : 'Fasilitas kelas belum ditambahkan.' }}">
+        <x-level-section eyebrow="{{ $isInklusi ? 'Sarana Terapi' : ($isBoarding ? 'Sarana Boarding' : 'Sarana Belajar') }}" title="{{ $isInklusi ? 'Fasilitas Terapi' : ($isBoarding ? 'Fasilitas Boarding' : 'Fasilitas Kelas') }}" :items="$level->classStats"
+                          empty-message="{{ $isInklusi ? 'Fasilitas terapi belum ditambahkan.' : ($isBoarding ? 'Fasilitas boarding belum ditambahkan.' : 'Fasilitas kelas belum ditambahkan.') }}">
             @foreach ($level->classStats as $stat)
                 <x-image-card :item="$stat" />
             @endforeach
