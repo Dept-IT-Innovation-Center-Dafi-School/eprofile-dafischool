@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EducationLevelSeeder::class);
         $this->call(HeroSlideSeeder::class);
         $this->call(SchoolSettingSeeder::class);
+        $this->call(TestimonialSeeder::class);
     }
 }

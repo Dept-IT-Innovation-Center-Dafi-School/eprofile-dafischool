@@ -110,6 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.hero-swiper')) {
         import('./hero-swiper.js');
     }
+    if (document.querySelector('.testimonial-swiper')) {
+        import('./testimonial-swiper.js');
+    }
 });
 
 // Image lightbox — plain DOM, no framework dependency. Any element with

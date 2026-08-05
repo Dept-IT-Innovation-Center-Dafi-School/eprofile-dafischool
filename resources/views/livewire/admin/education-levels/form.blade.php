@@ -9,13 +9,14 @@
     @if ($level)
         <div class="border-b border-slate-200">
             <nav aria-label="Bagian jenjang" role="tablist" class="flex flex-wrap gap-1 -mb-px">
-                @foreach ([
+                @foreach (array_filter([
                     'info' => 'Info Dasar',
                     'facilities' => 'Fasilitas Jenjang',
                     'class-stats' => $level?->slug === 'inklusi' ? 'Fasilitas Terapi' : ($level?->slug === 'boarding smpit-smait' ? 'Fasilitas Boarding' : 'Fasilitas Kelas'),
                     'extracurriculars' => 'Ekstrakurikuler',
                     'activities' => $level?->slug === 'inklusi' ? 'Aktivitas Terapi' : ($level?->slug === 'boarding smpit-smait' ? 'Aktivitas Boarding' : 'Aktivitas Belajar'),
-                ] as $tabKey => $tabLabel)
+                    'testimonials' => $level?->slug === 'sma' ? 'Testimoni Alumni' : null,
+                ]) as $tabKey => $tabLabel)
                     <button type="button" @click="tab = '{{ $tabKey }}'"
                             :class="tab === '{{ $tabKey }}' ? 'border-primary-600 text-primary-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
                             :aria-selected="tab === '{{ $tabKey }}'" role="tab"
@@ -119,5 +120,10 @@
         <div x-show="tab === 'activities'" x-cloak role="tabpanel">
             <livewire:admin.activities.manager :education-level-id="$level->id" :key="'activities-'.$level->id" />
         </div>
+        @if ($level?->slug === 'sma')
+            <div x-show="tab === 'testimonials'" x-cloak role="tabpanel">
+                <livewire:admin.testimonials.manager :education-level-id="$level->id" :key="'testimonials-'.$level->id" />
+            </div>
+        @endif
     @endif
 </div>

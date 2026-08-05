@@ -30,6 +30,11 @@ class EducationLevel extends Model
         return $this->hasMany(Activity::class)->orderBy('order');
     }
 
+    public function testimonials(): HasMany
+    {
+        return $this->hasMany(Testimonial::class)->orderBy('order');
+    }
+
     // Case-insensitive route model binding
     public function resolveRouteBinding($value, $field = null)
     {

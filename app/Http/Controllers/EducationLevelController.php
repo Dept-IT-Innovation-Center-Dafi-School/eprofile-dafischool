@@ -23,6 +23,7 @@ class EducationLevelController extends Controller
             'classStats' => fn ($query) => $query->where('academic_year_id', $activeYearId),
             'extracurriculars' => fn ($query) => $query->where('academic_year_id', $activeYearId),
             'activities' => fn ($query) => $query->where('academic_year_id', $activeYearId),
+            'testimonials',
         ]);
 
         // Hide extracurriculars section for RTK unit (order=1)
@@ -32,12 +33,14 @@ class EducationLevelController extends Controller
 
         $isBoarding = $educationLevel->slug === 'boarding smpit-smait';
         $isInklusi = $educationLevel->slug === 'inklusi';
+        $isSma = $educationLevel->slug === 'sma';
 
         return view('levels.show', [
             'level' => $educationLevel,
             'allLevels' => $levels,
             'isBoarding' => $isBoarding,
             'isInklusi' => $isInklusi,
+            'isSma' => $isSma,
         ]);
     }
 }
