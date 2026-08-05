@@ -92,6 +92,10 @@ class Form extends Component
             },
             $sanitizedProgram
         );
+
+        // Merge adjacent <p> tags (from removed single Enter) with <br> inside same paragraph
+        $sanitizedProgram = preg_replace('/<\/p>\s*<p>/', '<br>', $sanitizedProgram);
+
         // Remove leading/trailing <br> tags
         $sanitizedProgram = preg_replace('/^<br\s*\/?>\s*|<br\s*\/?>\s*$/i', '', $sanitizedProgram);
 
