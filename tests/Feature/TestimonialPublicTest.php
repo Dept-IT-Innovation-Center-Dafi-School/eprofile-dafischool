@@ -20,10 +20,10 @@ class TestimonialPublicTest extends TestCase
         ]);
     }
 
-    public function test_sma_unit_page_shows_testimonial_carousel(): void
+    public function test_smait_unit_page_shows_testimonial_carousel(): void
     {
-        $sma = $this->level('sma');
-        $sma->testimonials()->create([
+        $smait = $this->level('smait');
+        $smait->testimonials()->create([
             'name' => 'Herman',
             'campus' => 'Universitas Indonesia',
             'batch' => '2018',
@@ -31,7 +31,7 @@ class TestimonialPublicTest extends TestCase
             'order' => 0,
         ]);
 
-        $response = $this->get(route('levels.show', $sma->slug));
+        $response = $this->get(route('levels.show', $smait->slug));
 
         $response->assertOk();
         $response->assertSee('Testimoni Alumni');
@@ -59,11 +59,11 @@ class TestimonialPublicTest extends TestCase
         $response->assertDontSee('testimonial-swiper');
     }
 
-    public function test_sma_unit_page_hides_section_when_no_testimonials_exist(): void
+    public function test_smait_unit_page_hides_section_when_no_testimonials_exist(): void
     {
-        $sma = $this->level('sma');
+        $smait = $this->level('smait');
 
-        $response = $this->get(route('levels.show', $sma->slug));
+        $response = $this->get(route('levels.show', $smait->slug));
 
         $response->assertOk();
         $response->assertDontSee('Testimoni Alumni');

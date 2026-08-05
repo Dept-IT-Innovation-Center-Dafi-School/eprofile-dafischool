@@ -88,7 +88,7 @@
         </x-level-section>
 
         <!-- Testimonials (hanya unit SMA) -->
-        @if ($isSma && $level->testimonials->isNotEmpty())
+        @if ($isSmait && $level->testimonials->isNotEmpty())
             <section id="testimoni-alumni" class="max-w-6xl mx-auto px-4 mt-12 scroll-mt-20">
                 <x-section-heading eyebrow="Kata Mereka" title="Testimoni Alumni" />
                 <div class="swiper testimonial-swiper">

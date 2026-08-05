@@ -21,8 +21,8 @@ class TestimonialsManagerTest extends TestCase
         parent::setUp();
 
         $this->level = EducationLevel::create([
-            'name' => 'SMA (Sekolah Menengah Atas)',
-            'slug' => 'sma',
+            'name' => 'SMAIT (Sekolah Menengah Atas Islam Terpadu)',
+            'slug' => 'smait',
             'tagline' => 'Tagline',
             'program' => 'Program',
         ]);
@@ -99,7 +99,7 @@ class TestimonialsManagerTest extends TestCase
         $this->assertDatabaseHas('testimonials', ['id' => $second->id, 'order' => 0]);
     }
 
-    public function test_testimonial_tab_only_appears_for_sma_unit(): void
+    public function test_testimonial_tab_only_appears_for_smait_unit(): void
     {
         $user = User::factory()->create();
         $sd = EducationLevel::create([

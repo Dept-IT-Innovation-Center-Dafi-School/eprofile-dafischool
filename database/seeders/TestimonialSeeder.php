@@ -10,7 +10,7 @@ class TestimonialSeeder extends Seeder
 {
     public function run(): void
     {
-        $level = EducationLevel::where('slug', 'sma')->first();
+        $level = EducationLevel::where('slug', 'smait')->first();
 
         if (! $level) {
             return;

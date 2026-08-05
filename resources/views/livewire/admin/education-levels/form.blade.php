@@ -15,7 +15,7 @@
                     'class-stats' => $level?->slug === 'inklusi' ? 'Fasilitas Terapi' : ($level?->slug === 'boarding smpit-smait' ? 'Fasilitas Boarding' : 'Fasilitas Kelas'),
                     'extracurriculars' => 'Ekstrakurikuler',
                     'activities' => $level?->slug === 'inklusi' ? 'Aktivitas Terapi' : ($level?->slug === 'boarding smpit-smait' ? 'Aktivitas Boarding' : 'Aktivitas Belajar'),
-                    'testimonials' => $level?->slug === 'sma' ? 'Testimoni Alumni' : null,
+                    'testimonials' => $level?->slug === 'smait' ? 'Testimoni Alumni' : null,
                 ]) as $tabKey => $tabLabel)
                     <button type="button" @click="tab = '{{ $tabKey }}'"
                             :class="tab === '{{ $tabKey }}' ? 'border-primary-600 text-primary-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
@@ -120,7 +120,7 @@
         <div x-show="tab === 'activities'" x-cloak role="tabpanel">
             <livewire:admin.activities.manager :education-level-id="$level->id" :key="'activities-'.$level->id" />
         </div>
-        @if ($level?->slug === 'sma')
+        @if ($level?->slug === 'smait')
             <div x-show="tab === 'testimonials'" x-cloak role="tabpanel">
                 <livewire:admin.testimonials.manager :education-level-id="$level->id" :key="'testimonials-'.$level->id" />
             </div>
