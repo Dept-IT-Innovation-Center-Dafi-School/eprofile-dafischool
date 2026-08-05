@@ -28,14 +28,24 @@ document.addEventListener('alpine:init', () => {
                 },
             });
 
+            // Load initial content: set editor DOM directly, then sync to textarea
             if (textarea.value) {
-                this.editor.clipboard.dangerouslyPasteHTML(textarea.value);
+                this.editor.root.innerHTML = textarea.value;
             }
 
+            // Sync editor content to textarea on any change
             this.editor.on('text-change', () => {
                 textarea.value = this.editor.root.innerHTML;
                 textarea.dispatchEvent(new Event('input', { bubbles: true }));
             });
+
+            // Also sync on form submit to ensure latest content
+            const form = this.editor.root.closest('form');
+            if (form) {
+                form.addEventListener('submit', () => {
+                    textarea.value = this.editor.root.innerHTML;
+                });
+            }
         },
     }));
 
