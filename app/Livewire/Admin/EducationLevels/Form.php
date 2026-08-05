@@ -83,21 +83,30 @@ class Form extends Component
         $imageUrl = $this->resolveImageUrl('uploads/education-levels');
         $sanitizedProgram = Purifier::clean($this->program, 'program_editor');
 
+        \Log::info('After purifier', ['content' => $sanitizedProgram]);
+
         // Collapse empty <p></p> groups: remove single Enter (1 empty p), convert 2+ Enters to <br>
         $sanitizedProgram = preg_replace_callback(
             '/<p>\s*<\/p>(<p>\s*<\/p>)*/i',
             function($matches) {
                 $count = substr_count($matches[0], '<p>');
-                return $count >= 2 ? '<br>' : '';  // 2+ Enters: keep as break, 1 Enter: remove
+                \Log::info('Collapse match', ['matched' => $matches[0], 'count' => $count, 'replacement' => ($count >= 2 ? '<br>' : '')]);
+                return $count >= 2 ? '<br>' : '';
             },
             $sanitizedProgram
         );
 
+        \Log::info('After collapse', ['content' => $sanitizedProgram]);
+
         // Merge adjacent <p> tags (from removed single Enter) with <br> inside same paragraph
         $sanitizedProgram = preg_replace('/<\/p>\s*<p>/', '<br>', $sanitizedProgram);
 
+        \Log::info('After merge', ['content' => $sanitizedProgram]);
+
         // Remove leading/trailing <br> tags
         $sanitizedProgram = preg_replace('/^<br\s*\/?>\s*|<br\s*\/?>\s*$/i', '', $sanitizedProgram);
+
+        \Log::info('Final saved', ['content' => $sanitizedProgram]);
 
         if ($this->level) {
             $this->level->update([
