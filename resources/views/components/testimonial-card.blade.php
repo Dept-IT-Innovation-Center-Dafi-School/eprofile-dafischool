@@ -1,30 +1,15 @@
 @props(['testimonial'])
 
-<div class="md:grid md:grid-cols-12 md:items-center max-w-5xl mx-auto">
-    <div class="md:col-span-7">
-        <div class="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-slate-900/10 bg-slate-100">
-            @if ($testimonial->image)
-                <img src="{{ $testimonial->image }}" alt="{{ $testimonial->name }}" loading="lazy"
-                     decoding="async" class="w-full h-full object-cover object-top">
-            @else
-                <x-image-placeholder label="Foto {{ $testimonial->name }}" class="w-full h-full" />
-            @endif
-        </div>
-    </div>
+<article class="testimonial-card h-full flex flex-col bg-white rounded-2xl shadow-lg ring-1 ring-slate-900/5 px-6 py-7 sm:px-8">
+    <span class="font-serif text-5xl leading-none text-gold-200 select-none" aria-hidden="true">&ldquo;</span>
 
-    <div class="relative z-10 md:col-span-7 md:col-start-6 -mt-10 md:mt-0">
-        <div class="relative rounded-3xl bg-white shadow-xl ring-1 ring-slate-900/5 px-6 sm:px-10 py-8 sm:py-10 overflow-hidden">
-            <span class="absolute -top-7 -left-2 font-serif text-[110px] leading-none text-gold-200 select-none pointer-events-none" aria-hidden="true">&ldquo;</span>
+    <blockquote class="mt-3 flex-1 text-slate-700 leading-relaxed">
+        {{ $testimonial->quote }}
+    </blockquote>
 
-            <blockquote class="relative font-serif text-slate-700 text-xl sm:text-2xl leading-relaxed">
-                {{ $testimonial->quote }}
-            </blockquote>
-
-            <footer class="relative mt-7 pt-6 border-t border-slate-100">
-                <p class="font-semibold text-slate-900">{{ $testimonial->name }}</p>
-                <p class="text-slate-500">{{ $testimonial->campus }}</p>
-                <p class="text-sm font-semibold tracking-wide text-gold-600">Angkatan {{ $testimonial->batch }}</p>
-            </footer>
-        </div>
-    </div>
-</div>
+    <footer class="mt-6 pt-5 border-t border-slate-100">
+        <p class="font-semibold text-slate-900">{{ $testimonial->name }}</p>
+        <p class="text-slate-500">{{ $testimonial->campus }}</p>
+        <p class="text-sm font-semibold tracking-wide text-gold-600">Angkatan {{ $testimonial->batch }}</p>
+    </footer>
+</article>

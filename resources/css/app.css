@@ -45,6 +45,23 @@
         border-radius: 9999px;
     }
 
+    /* Testimonial carousel: active card enlarges, side cards recede.
+       Scale is applied to the inner card (not the slide) to avoid
+       clashing with Swiper's own slide transforms. */
+    .testimonial-card {
+        transition: transform 400ms ease, opacity 400ms ease, box-shadow 400ms ease;
+    }
+
+    .swiper-slide .testimonial-card {
+        transform: scale(0.92);
+        opacity: 0.65;
+    }
+
+    .swiper-slide-active .testimonial-card {
+        transform: scale(1);
+        opacity: 1;
+    }
+
     /* Soft shadow with gold glow for floating CTA */
     .shadow-glow {
         box-shadow: 0 8px 24px -4px rgba(218, 140, 22, 0.55), 0 2px 8px rgba(0, 0, 0, 0.15);

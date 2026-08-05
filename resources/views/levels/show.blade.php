@@ -96,7 +96,7 @@
                         <div class="swiper testimonial-swiper">
                             <div class="swiper-wrapper">
                                 @foreach ($level->testimonials as $testimonial)
-                                    <div class="swiper-slide !h-auto">
+                                    <div class="swiper-slide h-full">
                                         <x-testimonial-card :testimonial="$testimonial" />
                                     </div>
                                 @endforeach
