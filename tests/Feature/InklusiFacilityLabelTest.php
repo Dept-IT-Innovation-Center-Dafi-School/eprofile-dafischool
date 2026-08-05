@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Livewire\Admin\ClassStats\Manager;
+use App\Livewire\Admin\Activities\Manager as ActivitiesManager;
 use App\Models\AcademicYear;
 use App\Models\EducationLevel;
 use App\Models\User;
@@ -25,6 +26,7 @@ class InklusiFacilityLabelTest extends TestCase
 
         $year = AcademicYear::create(['label' => '2026/2027', 'is_active' => true]);
         $level->classStats()->create(['name' => 'Terapi Wicara', 'order' => 0, 'academic_year_id' => $year->id]);
+        $level->activities()->create(['activity' => 'Stimulasi Motorik', 'order' => 0, 'academic_year_id' => $year->id]);
 
         $response = $this->get(route('levels.show', $level->slug));
 
@@ -32,6 +34,9 @@ class InklusiFacilityLabelTest extends TestCase
         $response->assertSee('Sarana Terapi');
         $response->assertSee('Fasilitas Terapi');
         $response->assertDontSee('Fasilitas Kelas');
+        $response->assertSee('Kegiatan Terapi');
+        $response->assertSee('Aktivitas Terapi');
+        $response->assertDontSee('Aktivitas Belajar');
     }
 
     public function test_admin_class_stats_manager_labels_inklusi_class_stats_as_terapi(): void
@@ -48,5 +53,21 @@ class InklusiFacilityLabelTest extends TestCase
             ->test(Manager::class, ['educationLevelId' => $level->id])
             ->assertSee('Fasilitas Terapi')
             ->assertDontSee('Fasilitas Kelas');
+    }
+
+    public function test_admin_activities_manager_labels_inklusi_activities_as_terapi(): void
+    {
+        $user = User::factory()->create();
+        $level = EducationLevel::create([
+            'name' => 'Unit Inklusi',
+            'slug' => 'inklusi',
+            'tagline' => 'Tagline',
+            'program' => 'Program',
+        ]);
+
+        Livewire::actingAs($user)
+            ->test(ActivitiesManager::class, ['educationLevelId' => $level->id])
+            ->assertSee('Aktivitas Terapi')
+            ->assertDontSee('Aktivitas Belajar');
     }
 }

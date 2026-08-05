@@ -14,7 +14,7 @@
                     'facilities' => 'Fasilitas Jenjang',
                     'class-stats' => $level?->slug === 'inklusi' ? 'Fasilitas Terapi' : ($level?->slug === 'boarding smpit-smait' ? 'Fasilitas Boarding' : 'Fasilitas Kelas'),
                     'extracurriculars' => 'Ekstrakurikuler',
-                    'activities' => $level?->slug === 'boarding smpit-smait' ? 'Aktivitas Boarding' : 'Aktivitas Belajar',
+                    'activities' => $level?->slug === 'inklusi' ? 'Aktivitas Terapi' : ($level?->slug === 'boarding smpit-smait' ? 'Aktivitas Boarding' : 'Aktivitas Belajar'),
                 ] as $tabKey => $tabLabel)
                     <button type="button" @click="tab = '{{ $tabKey }}'"
                             :class="tab === '{{ $tabKey }}' ? 'border-primary-600 text-primary-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'"
