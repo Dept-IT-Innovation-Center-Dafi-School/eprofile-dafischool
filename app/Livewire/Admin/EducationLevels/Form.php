@@ -83,20 +83,8 @@ class Form extends Component
         $imageUrl = $this->resolveImageUrl('uploads/education-levels');
         $sanitizedProgram = Purifier::clean($this->program, 'program_editor');
 
-        // Remove single <p><br/></p> (single Enter), but keep 2+ consecutive ones
-        // First, mark 2+ consecutive <p><br/></p> to preserve them
-        $sanitizedProgram = preg_replace(
-            '/(<p>\s*<br\s*\/?>\s*<\/p>){2,}/i',
-            '<PLACEHOLDER_BR>',
-            $sanitizedProgram
-        );
-        // Remove all remaining single <p><br/></p> (these are single Enters)
-        $sanitizedProgram = preg_replace('/<p>\s*<br\s*\/?>\s*<\/p>/i', '', $sanitizedProgram);
-        // Restore marked 2+ consecutive ones as single <br>
-        $sanitizedProgram = str_replace('<PLACEHOLDER_BR>', '<br>', $sanitizedProgram);
-
-        // Merge adjacent <p> tags with <br> inside same paragraph
-        $sanitizedProgram = preg_replace('/<\/p>\s*<p>/', '<br>', $sanitizedProgram);
+        // Convert empty <p> tags (with or without <br>) to <br> for line breaks
+        $sanitizedProgram = preg_replace('/<p>\s*(?:<br\s*\/?>\s*)?<\/p>/i', '<br>', $sanitizedProgram);
 
         // Remove leading/trailing <br> tags
         $sanitizedProgram = preg_replace('/^<br\s*\/?>\s*|<br\s*\/?>\s*$/i', '', $sanitizedProgram);
